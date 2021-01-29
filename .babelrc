@@ -1,0 +1,12 @@
+  {
+    "plugins": [
+      "transform-react-pug",
+      "@babel/plugin-proposal-class-properties",
+      // enable async/await calls and more using transofrm-runtime
+      "@babel/plugin-transform-runtime"
+    ],
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  }

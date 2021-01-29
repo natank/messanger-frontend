@@ -1,0 +1,26 @@
+@import '../abstracts/abstracts';
+@import '../Base/utils';
+.new-todo {
+  border: 1px solid $color-primary;
+  padding-top: 3rem;
+
+  fieldset{
+    border: none;
+  }
+
+  &__title{
+    width: 70%;
+    margin: auto;
+  }
+  &__actions {
+    text-align: right;
+    button {
+      margin-right: 1rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  
+
+}

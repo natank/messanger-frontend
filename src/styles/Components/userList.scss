@@ -1,0 +1,23 @@
+@import '../Base/utils';
+.userList {
+  border: 2px solid black;
+  border-radius: 3rem;
+  padding: 2rem;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  &__search {
+    > * {
+      display: block;
+    }
+    display:flex;
+    justify-content: space-between;
+    align-items: top;
+    min-width: 13rem;
+    input {
+      width: 8rem;
+    }
+  }
+}

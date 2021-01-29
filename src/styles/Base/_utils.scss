@@ -1,0 +1,8 @@
+@import '../abstracts/abstracts';
+.btn {
+    border-radius: 6px;
+    padding: 7px;
+    &--secondary{
+        background-color: $color-secondary;
+    }
+}
