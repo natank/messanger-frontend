@@ -97,14 +97,14 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
      inkscape:cx="730.2488"
-     inkscape:cy="887.59424"
+     inkscape:cy="645.15763"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1267"
      inkscape:window-height="967"
-     inkscape:window-x="1359"
-     inkscape:window-y="97"
+     inkscape:window-x="16"
+     inkscape:window-y="215"
      inkscape:window-maximized="0"
      inkscape:document-rotation="0" />
   <metadata
@@ -157,12 +157,23 @@
        style="font-style:normal;font-weight:normal;font-size:5.91927px;line-height:1.6;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="49.214405"
        y="34.866848"
-       id="text144"><tspan
+       id="text1038"><tspan
          sodipodi:role="line"
-         id="tspan142"
+         id="tspan1036"
          x="49.214405"
          y="34.866848"
          style="fill:#f9f9f9;stroke-width:0.264583">Chats</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.91927px;line-height:1.6;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="181.78009"
+       y="34.866848"
+       id="text144"><tspan
+         sodipodi:role="line"
+         id="tspan142"
+         x="181.78009"
+         y="34.866848"
+         style="fill:#f9f9f9;stroke-width:0.264583">Logout</tspan></text>
     <g
        id="g150"
        style="stroke:#ffffff;stroke-opacity:1">
