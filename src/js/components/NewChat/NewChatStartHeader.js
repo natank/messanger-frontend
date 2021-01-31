@@ -23,7 +23,7 @@ let useStyles = makeStyles({
 	},
 });
 
-export default function NewChatS1Header() {
+export default function NewChatStartHeader() {
 	let classes = useStyles();
 	let history = useHistory();
 	function handleChange(event, newValue) {}

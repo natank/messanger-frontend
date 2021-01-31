@@ -1,12 +1,11 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
-import Header from './NewChatS1Header';
+import Header from './NewChatStartHeader';
 
 export default function NewChat() {
-	let [mode, setMode] = 'start'; /*search, subject */
 	return (
 		<Container disableGutters={true}>
-			<Header mode={mode} />
+			<Header />
 		</Container>
 	);
 

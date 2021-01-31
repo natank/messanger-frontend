@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function () {
+export default function NewChatSearchHeader() {
 	return <div>s2 header</div>;
 }
