@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NewChatStartHeader from './NewChatStartHeader';
-import NewChatSearchHeader from './NewChatSearchHeader';
+import ChatFindHeader from '../Common/ChatFindHeader';
 import NewChatSubjectHeader from './NewChatSubjectHeader';
 
 export default function NewChatHeader() {
@@ -9,9 +9,9 @@ export default function NewChatHeader() {
 		case 'start':
 			return <NewChatStartHeader setMode={setMode} />;
 		case 'search':
-			return <NewChatSearchHeade setMode={setMode} />;
+			return <ChatFindHeader setMode={setMode} prevMode={'start'} />;
 		case 'subject':
-			return <NewChatSubjectHeade setMode={setMode} />;
+			return <NewChatSubjectHeader setMode={setMode} />;
 	}
 	return <div></div>;
 }

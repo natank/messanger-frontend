@@ -9,12 +9,10 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import HeaderContainer from '../Common/HeaderContainer'
 
 let useStyles = makeStyles({
-	root: {
-		backgroundColor: 'green',
-		color: '#fff',
-	},
+
 	headline: {
 		display: 'flex',
 		padding: '.5rem',
@@ -29,7 +27,8 @@ export default function ChatListHeader({ setMode }) {
 	function handleChange(event, newValue) {}
 
 	return (
-		<Container className={classes.root}>
+		
+		<HeaderContainer backgroundColor='green' color='#fff'>
 			<div className={classes.headline}>
 				<Typography>Messanger</Typography>
 				<Button color='inherit' onClick={() => setMode('search')}>
@@ -49,6 +48,6 @@ export default function ChatListHeader({ setMode }) {
 					label='Logout'
 					{...{ id: 'logout', 'aria-controls': 'tabpanel 3' }}></Tab>
 			</Tabs>
-		</Container>
+		</HeaderContainer>
 	);
 }

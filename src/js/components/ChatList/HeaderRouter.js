@@ -2,7 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import { useState } from 'react';
 import ChatHeader from './ChatListHeader';
-import ChatFind from './ChatFindHeader';
+import ChatFindHeader from '../Common/ChatFindHeader';
 
 export default function HeaderRouter() {
 	let [mode, setMode] = useState('chats');
@@ -11,7 +11,7 @@ export default function HeaderRouter() {
 			return <ChatHeader setMode={setMode} />;
 			break;
 		case 'search':
-			return <ChatFind setMode={setMode} />;
+			return <ChatFindHeader setMode={setMode} prevMode='chats' />;
 		case 'chats-find':
 			return;
 		default:
