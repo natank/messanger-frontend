@@ -27,7 +27,7 @@ function MainView() {
 	return (
 		<Container
 			id='siteContainer'
-			disableGutters
+			disableGutters={true}
 			className={classes.root}
 			maxWidth={false}>
 			<Switch>

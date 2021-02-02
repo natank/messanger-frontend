@@ -9,10 +9,9 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import HeaderContainer from '../Common/HeaderContainer'
+import HeaderContainer from '../Common/HeaderContainer';
 
 let useStyles = makeStyles({
-
 	headline: {
 		display: 'flex',
 		padding: '.5rem',
@@ -27,7 +26,6 @@ export default function ChatListHeader({ setMode }) {
 	function handleChange(event, newValue) {}
 
 	return (
-		
 		<HeaderContainer backgroundColor='green' color='#fff'>
 			<div className={classes.headline}>
 				<Typography>Messanger</Typography>

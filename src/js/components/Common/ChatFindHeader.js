@@ -4,25 +4,25 @@ import { makeStyles } from '@material-ui/styles';
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 import SearchField from './SearchField';
-import HeaderContainer from './HeaderContainer'
+import HeaderContainer from './HeaderContainer';
 export default function ChatFindHeader({ setMode, prevMode }) {
 	let useStyles = makeStyles(theme => ({
 		headerContainer: {
 			display: 'flex',
 			alignItems: 'center',
-			backgroundColor:'red'
+			height: '5rem',
 		},
 	}));
 	let classes = useStyles();
 	let [filter, setFilter] = useState('');
 	return (
-		<HeaderContainer className={classes.headerContainer}>
+		<Container disableGutters className={classes.headerContainer}>
 			<Button>
 				<ArrowBack onClick={() => setMode(prevMode)} />
 			</Button>
 
-			<SearchField handleChange={handleChange} filter={filter}/>
-		</HeaderContainer>
+			<SearchField handleChange={handleChange} filter={filter} />
+		</Container>
 	);
 
 	function handleChange(event) {

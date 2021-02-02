@@ -19,7 +19,7 @@ export default function App() {
 	let classes = useStyles();
 	return (
 		<ThemeProvider theme={theme}>
-			<Container maxWidth='sm' className={classes.appContainer}>
+			<Container disableGutters maxWidth='sm' className={classes.appContainer}>
 				<Switch>
 					<Route path='/login' exact>
 						<Login />

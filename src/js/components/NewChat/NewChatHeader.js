@@ -3,8 +3,7 @@ import NewChatStartHeader from './NewChatStartHeader';
 import ChatFindHeader from '../Common/ChatFindHeader';
 import NewChatSubjectHeader from './NewChatSubjectHeader';
 
-export default function NewChatHeader() {
-	let [mode, setMode] = useState('start'); /*search, subject */
+export default function NewChatHeader({ mode, setMode }) {
 	switch (mode) {
 		case 'start':
 			return <NewChatStartHeader setMode={setMode} />;

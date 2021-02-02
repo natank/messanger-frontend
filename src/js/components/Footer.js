@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	footer: {
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: 'green',
 		width: '100%',
 		position: 'absolute',
 		bottom: '0',
@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	attribution: {
+		visibility: 'hidden',
+		display: 'none',
 	},
 	footerTitle: {
 		flexGrow: 4,
@@ -37,44 +41,46 @@ export default function Footer() {
 		<React.Fragment>
 			<footer className={classes.footer}>
 				<Typography variant='h4' className={classes.footerTitle}>
-					MovieNG
+					Messanger App
 				</Typography>
 				<Typography variant='body1' className={classes.footerCopy}>
-					Created 2020, Nati Kamusher
+					Created 2021, Nati Kamusher
 				</Typography>
-				<div>
-					Icons made by{' '}
-					<a
-						href='https://www.flaticon.com/authors/vitaly-gorbachev'
-						title='Vitaly Gorbachev'>
-						Vitaly Gorbachev
-					</a>{' '}
-					from{' '}
-					<a href='https://www.flaticon.com/' title='Flaticon'>
-						www.flaticon.com
-					</a>
-				</div>
-				<div>
-					Icons made by{' '}
-					<a
-						href='https://www.flaticon.com/authors/vectors-market'
-						title='Vectors Market'>
-						Vectors Market
-					</a>{' '}
-					from{' '}
-					<a href='https://www.flaticon.com/' title='Flaticon'>
-						www.flaticon.com
-					</a>
-				</div>
-				<div>
-					Icons made by{' '}
-					<a href='https://www.freepik.com' title='Freepik'>
-						Freepik
-					</a>{' '}
-					from{' '}
-					<a href='https://www.flaticon.com/' title='Flaticon'>
-						www.flaticon.com
-					</a>
+				<div className={classes.attribution}>
+					<div>
+						Icons made by{' '}
+						<a
+							href='https://www.flaticon.com/authors/vitaly-gorbachev'
+							title='Vitaly Gorbachev'>
+							Vitaly Gorbachev
+						</a>{' '}
+						from{' '}
+						<a href='https://www.flaticon.com/' title='Flaticon'>
+							www.flaticon.com
+						</a>
+					</div>
+					<div>
+						Icons made by{' '}
+						<a
+							href='https://www.flaticon.com/authors/vectors-market'
+							title='Vectors Market'>
+							Vectors Market
+						</a>{' '}
+						from{' '}
+						<a href='https://www.flaticon.com/' title='Flaticon'>
+							www.flaticon.com
+						</a>
+					</div>
+					<div>
+						Icons made by{' '}
+						<a href='https://www.freepik.com' title='Freepik'>
+							Freepik
+						</a>{' '}
+						from{' '}
+						<a href='https://www.flaticon.com/' title='Flaticon'>
+							www.flaticon.com
+						</a>
+					</div>
 				</div>
 			</footer>
 			<FooterMargin />

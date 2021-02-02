@@ -23,7 +23,7 @@ let useStyles = makeStyles({
 	},
 });
 
-export default function NewChatStartHeader({setMode}) {
+export default function NewChatStartHeader({ setMode }) {
 	let classes = useStyles();
 	let history = useHistory();
 	function handleChange(event, newValue) {}
