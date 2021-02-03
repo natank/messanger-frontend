@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import PrivateRoute from '../components/Auth/PrivateRoute';
 import Chats from '../components/ChatList/ChatsList';
 import NewChat from '../components/NewChat/NewChat';
+import Feed from '../components/Feed/Feed';
 
 let useStyles = makeStyles(theme => ({
 	root: {
@@ -36,6 +37,9 @@ function MainView() {
 				</Route>
 				<Route path='/new'>
 					<PrivateRoute {...{ component: NewChat }} />
+				</Route>
+				<Route path='/feed'>
+					<PrivateRoute {...{component: Feed}} />
 				</Route>
 			</Switch>
 

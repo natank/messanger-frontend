@@ -17,6 +17,12 @@
   <defs
      id="defs2">
     <rect
+       x="-183.34689"
+       y="61.471991"
+       width="291.85832"
+       height="250.69881"
+       id="rect223" />
+    <rect
        x="146.4637"
        y="221.29917"
        width="77.508163"
@@ -101,11 +107,11 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1267"
-     inkscape:window-height="967"
-     inkscape:window-x="16"
-     inkscape:window-y="215"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
      inkscape:document-rotation="0" />
   <metadata
      id="metadata5">
@@ -1056,5 +1062,72 @@
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1155);fill:#000000;fill-opacity:1;stroke:none;"><tspan
          x="146.46289"
          y="230.95429"><tspan>new message</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text221"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect223);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(-71.093694,-49.177593)"><tspan
+         x="-183.34766"
+         y="71.128121"><tspan>Chats screen:
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="84.357247"><tspan>On startup - load last 20 chats
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="97.586373"><tspan>
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="110.8155"><tspan>When chat clicked: 
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="124.04463"><tspan>Private chat - search if there's a chat with this user. 
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="137.27375"><tspan>if exist - load the chat
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="150.50288"><tspan>if not - create a new chat in the DB and an empty </tspan></tspan><tspan
+         x="-183.34766"
+         y="163.732"><tspan>feed
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="176.96113"><tspan>
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="190.19026"><tspan>
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="203.41938"><tspan>Group chat: Search for the chat by id in the DB and </tspan></tspan><tspan
+         x="-183.34766"
+         y="216.64851"><tspan>load the messages for its feed in the feed screen
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="229.87763"><tspan>
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="243.10676"><tspan>change the current feed id in the context
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="256.33589"><tspan>
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="269.56501"><tspan>When searching for chat:
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="282.79414"><tspan>Search the DB for users or chats and load them to the </tspan></tspan><tspan
+         x="-183.34766"
+         y="296.02326"><tspan>chat list (exact match then starts with)
+</tspan></tspan><tspan
+         x="-183.34766"
+         y="309.25239"><tspan>
+</tspan></tspan><tspan
+         style="visibility:hidden"
+         x="-183.34766"
+         y="321.82539"><tspan>
+</tspan></tspan><tspan
+         style="visibility:hidden"
+         x="-183.34766"
+         y="335.05451"><tspan>
+</tspan></tspan></text>
   </g>
 </svg>

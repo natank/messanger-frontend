@@ -1,48 +1,32 @@
 import { List } from '@material-ui/core';
 import { Fragment } from 'react';
 
-import HeaderRouter from './HeaderRouter';
-import ChatBox from './ChatItem';
-import React from 'react';
-import womanAvatar from '../../../images/woman.png';
-import manAvatar from '../../../images/man.png';
-import groupAvatar from '../../../images/group.png';
+import React, {useState, useEffect} from 'react';
 
-let chats = [
-	{
-		name: 'Amit',
-		latestMessage: {
-			user: 'Amit',
-			text: 'Hi',
-		},
-		avatar: womanAvatar,
-	},
-	{
-		name: 'Gal',
-		latestMessage: {
-			user: 'Gal',
-			text: 'Duis aute irure dolor in reprehenderit?',
-		},
-		avatar: manAvatar,
-	},
-	{
-		name: 'JR Devs',
-		latestMessage: {
-			user: 'Maya',
-			text: 'sed do eiusmod',
-		},
-		avatar: groupAvatar,
-	},
-];
+
+import ChatBox from './ChatItem';
+import HeaderRouter from './HeaderRouter';
+import * as ChatModel from '../../Model/chat-model'
+
+
 
 export default function Chats(props) {
-	let v = 1;
+	var [chats, setChats] = useState(undefined);
+
+	useEffect(()=>{
+		if(!chats){
+			ChatModel.getChats().then(chats=>{
+				setChats(chats)
+			}).catch(err=>console.log(err));
+		}
+	}, [])
+
 	return (
 		<Fragment>
 			<HeaderRouter />
 			<List aria-label='recent chats list'>
-				{chats.map((chat, index) => (
-					<ChatBox key={index} chatDetails={chat} />
+				{chats && chats.map((chatDetails, index) => (
+					<ChatBox key={index} chatDetails={chatDetails} />
 				))}
 			</List>
 		</Fragment>
