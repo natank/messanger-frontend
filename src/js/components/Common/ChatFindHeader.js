@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 import SearchField from './SearchField';
-import HeaderContainer from './HeaderContainer';
 export default function ChatFindHeader({ setMode, prevMode }) {
 	let useStyles = makeStyles(theme => ({
 		headerContainer: {

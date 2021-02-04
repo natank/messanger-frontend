@@ -42,9 +42,10 @@ export function MainContextProvider(props) {
 		loadData().then(data => setUsers(data.users));
 	});
 	var token = localStorage.getItem('token');
-	let currentChatId = undefined;
+	let currentChatDetails = undefined;
+	//chatDetails : {chatId , withUser}
 	return (
-		<MainContext.Provider value={{ users, store, currentChatId }}>
+		<MainContext.Provider value={{ users, store, currentChatDetails }}>
 			{props.children}
 		</MainContext.Provider>
 	);

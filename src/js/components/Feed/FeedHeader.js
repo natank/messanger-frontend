@@ -1,21 +1,26 @@
 import {
 	Button,
-	Container,
 	makeStyles,
-	Tab,
-	Tabs,
 	Typography,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+
+import React, {useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 import HeaderContainer from '../Common/HeaderContainer';
+import { ArrowBack } from '@material-ui/icons';
+import { Avatar, Container } from '@material-ui/core';
+import womanAvatar from '../../../images/woman.png';
+import manAvatar from '../../../images/man.png';
+import groupAvatar from '../../../images/group.png';
 
 let useStyles = makeStyles({
-	headline: {
+
+	root: {
 		display: 'flex',
 		padding: '.5rem',
 		justifyContent: 'space-between',
+		backgroundColor: 'green',
+		color:'#fff'
 	},
 });
 
@@ -23,29 +28,21 @@ export default function FeedHeader({ setMode }) {
 	let classes = useStyles();
 	let history = useHistory();
 
+
 	function handleChange(event, newValue) {}
 
 	return (
-		<HeaderContainer backgroundColor='green' color='#fff'>
-			<div className={classes.headline}>
-				<Typography>Messanger</Typography>
-				<Button color='inherit' onClick={() => setMode('search')}>
-					<SearchIcon />
-				</Button>
-			</div>
-			<Tabs value={0} onChange={handleChange} aria-label='chat header tabs'>
-				<Tab
-					label='Chats'
-					{...{ id: 'chat', 'aria-controls': 'tabpanel 2' }}
-					value={0}></Tab>
-				<Tab
-					label='New Chat'
-					onClick={() => history.push('/new')}
-					{...{ id: 'newChat', 'aria-controls': 'tabpanel 1' }}></Tab>
-				<Tab
-					label='Logout'
-					{...{ id: 'logout', 'aria-controls': 'tabpanel 3' }}></Tab>
-			</Tabs>
-		</HeaderContainer>
+		<Container disableGutters className={classes.root}>
+			
+			<Button color='inherit'>
+				<ArrowBack onClick={() => history.push('/')} />
+			</Button>
+			<Avatar alt='woman avatar' src={womanAvatar} />
+			<Container>
+				<Typography variant="subtitle1">Gali</Typography>
+				<Typography variant="subtitle2">Amit, Sarit</Typography>
+			</Container>
+			
+		</Container>
 	);
 }

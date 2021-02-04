@@ -5,7 +5,7 @@ import FeedBody from './FeedBody';
 import FeedHeader from './FeedHeader';
 
 export default function Feed() {
-    let currentChatId = useContext(MainContext)
+    let currentChatDetails = useContext(MainContext)
     return (
         <Container disableGutters>
             <FeedHeader />
