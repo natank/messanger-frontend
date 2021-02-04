@@ -15,6 +15,8 @@ let useStyles = makeStyles(theme => ({
 	root: {
 		minHeight: '100vh',
 		position: 'relative',
+		display: 'flex',
+		flexDirection: 'column'
 	},
 }));
 function MainView() {
@@ -31,6 +33,7 @@ function MainView() {
 			disableGutters={true}
 			className={classes.root}
 			maxWidth={false}>
+
 			<Switch>
 				<Route exact path='/'>
 					<PrivateRoute {...{ component: Chats }} />

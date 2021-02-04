@@ -13,14 +13,18 @@ export default function FeedMessage({color="#fff", messageText="hello", authorNa
         headline: {
             color: "blue",
             display: "block"
+        },
+        body:{
+            color: "#000"
         }
+
     })
     let classes = useStyles();
 
     return (
         <Card className={classes.root}>
             <typography className={classes.headline} variant="body1">{authorName}</typography>
-            <typography variant="body2">{messageText}</typography>
+            <typography className={classes.body} variant="body2">{messageText}</typography>
         </Card>
     )
 }

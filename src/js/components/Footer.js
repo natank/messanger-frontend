@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 export default function Footer() {
 	const classes = useStyles();
 	return (
-		<React.Fragment>
+
 			<footer className={classes.footer}>
 				<Typography variant='h4' className={classes.footerTitle}>
 					Messanger App
@@ -83,8 +83,8 @@ export default function Footer() {
 					</div>
 				</div>
 			</footer>
-			<FooterMargin />
-		</React.Fragment>
+
+
 	);
 	function FooterMargin() {
 		return <div className={classes.footerMargin} />;
