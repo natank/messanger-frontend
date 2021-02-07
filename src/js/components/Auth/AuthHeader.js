@@ -11,7 +11,7 @@ export default function AuthHeader() {
 		<Grid container direction='column' alignItems='center'>
 			<Button variant='contained' color='primary' component={Link} to='/'>
 				<Typography component='h2' variant='h2' align='center'>
-					MovieNG
+					Messanger
 				</Typography>
 			</Button>
 		</Grid>

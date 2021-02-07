@@ -133,7 +133,10 @@ function UserDetails({ user, userPermissions, match }) {
 			console.log(err);
 		}
 
-		dispatch({
+		{
+			dispatch;
+		}
+		({
 			type: 'REMOVE_USER',
 			payload: {
 				userId,

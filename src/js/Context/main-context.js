@@ -8,9 +8,20 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../Model/user-model';
 
-import { authUserReducer } from '../Reducers/reducers';
+import { authUserReducer, currentChatReducer } from '../Reducers/reducers';
 
 export var MainContext = createContext();
+
+const defaultChatDetails = {
+	chatId: '123',
+	chatName: 'JR Devs',
+	latestMessage: { username: 'Gal', text: 'Hi there Group' },
+	participants: [
+		{ username: 'Dalit', userId: '123' },
+		{ username: 'Gil', userId: '776' },
+		{ username: 'Tali', userId: '734' },
+	],
+}; // Group chat
 
 export function MainContextProvider(props) {
 	try {
@@ -21,9 +32,11 @@ export function MainContextProvider(props) {
 
 	const initialState = {
 		authUser: sessionUser || null,
+		currentChat: null,
 	};
 	const rootReducer = combineReducers({
 		authUser: authUserReducer,
+		currentChat: currentChatReducer,
 	});
 
 	const [state, dispatch] = useReducer(rootReducer, initialState);
@@ -43,9 +56,10 @@ export function MainContextProvider(props) {
 	});
 	var token = localStorage.getItem('token');
 	let currentChatDetails = undefined;
-	//chatDetails : {chatId , withUser}
+	//chatDetails : {chatId , withUser, participants:{name, id}}
 	return (
-		<MainContext.Provider value={{ users, store, currentChatDetails }}>
+		<MainContext.Provider
+			value={{ authUser, users, store, currentChatDetails }}>
 			{props.children}
 		</MainContext.Provider>
 	);

@@ -1,9 +1,9 @@
-/**material ui components */
-import { Container, Fab, Input } from '@material-ui/core';
 /**icons */
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CheckIcon from '@material-ui/icons/Check';
 
+/**Third party */
+import { Container, Fab, Input } from '@material-ui/core';
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
@@ -12,8 +12,13 @@ import { makeStyles } from '@material-ui/styles';
 import Header from './NewChatHeader';
 import SelectedUsers from './SelectedUsers';
 import UserList from './UserList';
-import * as User from '../../Model/user-model';
+
+/**App context */
 import { MainContext } from '../../Context/main-context';
+
+/**Models */
+import * as User from '../../Model/user-model';
+import * as Chat from '../../Model/chat-model';
 
 let useStyles = makeStyles(theme => ({
 	root: {
@@ -47,7 +52,7 @@ export default function NewChat() {
 		selectedUsers: [],
 	});
 	let [mode, setMode] = useState('start'); /*search, subject */
-	let [gropupName, setGroupName] = useState('');
+	let [groupName, setGroupName] = useState('');
 
 	return (
 		<Container disableGutters={true}>
@@ -57,7 +62,7 @@ export default function NewChat() {
 					<Input
 						fullWidth={true}
 						placeholder='Type group subject here...'
-						value={gropupName}
+						value={groupName}
 						onChange={event => {
 							setGroupName(event.target.value);
 						}}
@@ -76,18 +81,20 @@ export default function NewChat() {
 
 			{/**submit group button*/}
 
-			{state.selectedUsers.length > 0 && gropupName.length > 0 ? (
+			{state.selectedUsers.length > 0 && groupName.length > 0 ? (
 				<Fab
 					color='secondary'
 					className={classes.submit}
 					onClick={() => {
-						history.push('/');
+						submitNewChat()
+							.then(() => history.push('/'))
+							.catch(err => console.log(err));
 					}}>
 					<CheckIcon />
 				</Fab>
 			) : null}
 
-			{/**continue to group subject button */}
+			{/**Clicking this button to continue to group subject button */}
 
 			{state.selectedUsers.length > 0 && mode !== 'subject' ? (
 				<Fab
@@ -107,6 +114,12 @@ export default function NewChat() {
 		setState({
 			listUsers: filteredListUsers,
 			selectedUsers: extendedSelectedUsers,
+		});
+	}
+	async function submitNewChat() {
+		await Chat.createChat({
+			members: state.selectedUsers.map(user => user.id),
+			name: groupName,
 		});
 	}
 }

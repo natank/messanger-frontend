@@ -13,11 +13,11 @@ export default function PrivateRoute({ match, component: Component, ...rest }) {
 			{...rest}
 			render={props => {
 				let result = checkAccessToRoute(`${match.url}`, authUser);
-				result = true;
+				// result = true;
 				return result ? (
 					<Component {...props} {...rest} />
 				) : (
-					<Redirect to='/' />
+					<Redirect to='/login' />
 				);
 			}}
 		/>

@@ -1,30 +1,43 @@
-import React from 'react'
-import {makeStyles, Card} from '@material-ui/core'
+import React from 'react';
+import { makeStyles, Card, Typography } from '@material-ui/core';
 
+export default function FeedMessage({
+	color = '#fff',
+	messageText = 'hello',
+	authorName = 'Eyal',
+}) {
+	let maxWidth = `${getRandom(30, 50)}%`;
+	let useStyles = makeStyles({
+		root: {
+			backgroundColor: color,
+			color: '#000',
+			maxWidth,
+			padding: '1rem',
+			marginBottom: '.5rem',
+		},
+		headline: {
+			color: 'blue',
+			display: 'block',
+			marginBottom: '1rem',
+		},
+		body: {
+			color: '#000',
+		},
+	});
+	let classes = useStyles();
 
+	return (
+		<Card className={classes.root}>
+			<Typography className={classes.headline} variant='body1'>
+				{authorName}
+			</Typography>
+			<Typography className={classes.body} variant='body2'>
+				{messageText}
+			</Typography>
+		</Card>
+	);
+}
 
-export default function FeedMessage({color="#fff", messageText="hello", authorName= "Eyal"}) {
-    let useStyles = makeStyles({
-        root: {
-            backgroundColor: color,
-            color: "#fff",
-            
-        },
-        headline: {
-            color: "blue",
-            display: "block"
-        },
-        body:{
-            color: "#000"
-        }
-
-    })
-    let classes = useStyles();
-
-    return (
-        <Card className={classes.root}>
-            <typography className={classes.headline} variant="body1">{authorName}</typography>
-            <typography className={classes.body} variant="body2">{messageText}</typography>
-        </Card>
-    )
+function getRandom(min, max) {
+	return Math.random() * (max - min + 1) + min;
 }

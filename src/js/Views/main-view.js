@@ -6,17 +6,19 @@ import { Container, Grid } from '@material-ui/core';
 
 import Footer from '../components/Footer';
 
+/**App components */
 import PrivateRoute from '../components/Auth/PrivateRoute';
 import Chats from '../components/ChatList/ChatsList';
 import NewChat from '../components/NewChat/NewChat';
 import Feed from '../components/Feed/Feed';
+import Login from '../components/Auth/Login';
 
 let useStyles = makeStyles(theme => ({
 	root: {
 		minHeight: '100vh',
 		position: 'relative',
 		display: 'flex',
-		flexDirection: 'column'
+		flexDirection: 'column',
 	},
 }));
 function MainView() {
@@ -33,7 +35,6 @@ function MainView() {
 			disableGutters={true}
 			className={classes.root}
 			maxWidth={false}>
-
 			<Switch>
 				<Route exact path='/'>
 					<PrivateRoute {...{ component: Chats }} />
@@ -42,7 +43,10 @@ function MainView() {
 					<PrivateRoute {...{ component: NewChat }} />
 				</Route>
 				<Route path='/feed'>
-					<PrivateRoute {...{component: Feed}} />
+					<PrivateRoute {...{ component: Feed }} />
+				</Route>
+				<Route path='/login'>
+					<Login />
 				</Route>
 			</Switch>
 

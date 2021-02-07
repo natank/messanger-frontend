@@ -1,7 +1,6 @@
 import { Button, Container, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import SearchIcon from '@material-ui/icons/Search';
 import { ArrowBack } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 

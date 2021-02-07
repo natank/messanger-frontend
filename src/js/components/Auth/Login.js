@@ -21,7 +21,7 @@ export default function Login(props) {
 	var { store } = useContext(MainContext);
 	var [state, dispatch] = store;
 	useEffect(() => {
-		if (user.redirect)
+		user.redirect &&
 			dispatch({
 				type: 'LOGIN_USER',
 				payload: user.user,
@@ -62,6 +62,7 @@ export default function Login(props) {
 								onChange={e => setPassword(e.target.value)}
 								autoComplete='current-password'
 							/>
+							{errorMessage ? <p>{errorMessage}</p> : null}
 							<Button
 								type='submit'
 								variant='contained'
@@ -89,7 +90,7 @@ export default function Login(props) {
 				user,
 			});
 		} catch (err) {
-			setErrorMessage(err);
+			setErrorMessage(err.errorMessage[0].msg);
 		}
 	}
 }
