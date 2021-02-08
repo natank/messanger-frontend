@@ -1,3 +1,5 @@
+import messanger from '../API/messanger'
+
 let defaultUsers = [
 	{ username: 'Amit', gender: 'm', id: '1', status: 'Sleeping' },
 	{ username: 'Gili', gender: 'f', id: '2', status: 'At gym' },
@@ -8,7 +10,13 @@ let defaultUsers = [
 export async function createUser(newUser) {}
 
 export async function getUsers() {
-	return defaultUsers;
+	try {
+		let response = await messanger.get('/users')
+		var users = response.data.users;
+		return users;
+	} catch (error) {
+		throw error
+	}
 }
 
 export async function findById(userId) {

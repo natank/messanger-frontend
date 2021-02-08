@@ -52,7 +52,7 @@ export function MainContextProvider(props) {
 	}, [authUser]);
 
 	useEffect(() => {
-		loadData().then(data => setUsers(data.users));
+		!users && loadData().then(data => setUsers(data.users));
 	});
 	var token = localStorage.getItem('token');
 	let currentChatDetails = undefined;

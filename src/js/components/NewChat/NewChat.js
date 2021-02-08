@@ -75,7 +75,7 @@ export default function NewChat() {
 			{mode !== 'subject' ? (
 				<UserList
 					onUserSelected={onUserSelected}
-					users={[...state.listUsers]}
+					users={state.listUsers ? [...state.listUsers] : []}
 				/>
 			) : null}
 

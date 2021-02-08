@@ -18,7 +18,7 @@ export default function UserItem({ user: userDetails, onUserSelected }) {
 				/>
 			</ListItemAvatar>
 			<ListItemText>
-				<h2>{userDetails.name}</h2>
+				<h2>{userDetails.username}</h2>
 				<p>{userDetails.status}</p>
 			</ListItemText>
 		</ListItem>
