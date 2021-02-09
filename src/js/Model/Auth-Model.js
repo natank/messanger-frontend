@@ -1,13 +1,11 @@
 import messanger from '../API/messanger';
 
-import CreateAccount from '../components/Auth/CreateAccount';
-import { collectIdsAndDocs } from './utils';
-
 export async function createAccount({
 	username,
 	password,
 	passwordConfirmation,
 	gender,
+	memberStatus,
 }) {
 	try {
 		let response = await messanger.put('/signup', {
@@ -15,6 +13,7 @@ export async function createAccount({
 			password,
 			passwordConfirmation,
 			gender,
+			status: memberStatus,
 		});
 		let json = response.data.json;
 		console.log(json);
@@ -33,6 +32,12 @@ export async function loginUser({ username, password }) {
 		throw theError.response.data;
 	}
 	let { user, token } = response.data;
-	localStorage.setItem('token', token);
+	sessionStorage.setItem('token', token);
+	sessionStorage.setItem('user', user);
 	return { ...user };
+}
+
+export async function logoutUser() {
+	sessionStorage.removeItem('token');
+	sessionStorage.removeItem('user');
 }

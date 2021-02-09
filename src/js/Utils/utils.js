@@ -13,12 +13,3 @@ export function today() {
 		(currDate < 10 ? '0' + currDate : currDate)
 	);
 }
-
-export function checkAccessToRoute(route, user) {
-	if (!(user)) return false;
-	return true;
-}
-
-export function getToken() {
-	return localStorage.getItem('token');
-}

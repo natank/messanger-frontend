@@ -21,7 +21,8 @@ let useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 	},
 }));
-function MainView() {
+function MainView(props) {
+	console.log(props);
 	var {
 		membersManagementUrl,
 		moviesManagementUrl,
@@ -44,9 +45,6 @@ function MainView() {
 				</Route>
 				<Route path='/feed'>
 					<PrivateRoute {...{ component: Feed }} />
-				</Route>
-				<Route path='/login'>
-					<Login />
 				</Route>
 			</Switch>
 

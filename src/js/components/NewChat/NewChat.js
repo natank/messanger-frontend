@@ -108,8 +108,14 @@ export default function NewChat() {
 	);
 
 	async function onUserSelected(userId) {
-		let selectedUser = await User.findById(userId);
-		let filteredListUsers = state.listUsers.filter(user => user.id !== userId);
+		let selectedUser = undefined;
+		let filteredListUsers = state.listUsers.filter(user => {
+			if (user.id !== userId) return true;
+			else {
+				selectedUser = user;
+				return false;
+			}
+		});
 		let extendedSelectedUsers = [...state.selectedUsers, selectedUser];
 		setState({
 			listUsers: filteredListUsers,
@@ -118,7 +124,7 @@ export default function NewChat() {
 	}
 	async function submitNewChat() {
 		await Chat.createChat({
-			members: state.selectedUsers.map(user => user.id),
+			members: state.selectedUsers,
 			name: groupName,
 		});
 	}

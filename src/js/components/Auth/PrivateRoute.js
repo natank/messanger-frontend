@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { Route, Redirect, useRouteMatch } from 'react-router-dom';
+import { Route, Redirect, useRouteMatch, useHistory } from 'react-router-dom';
 import { MainContext } from '../../Context/main-context';
-import { checkAccessToRoute } from '../../Utils/utils';
-export default function PrivateRoute({ match, component: Component, ...rest }) {
-	var { store } = useContext(MainContext);
-	var [state] = store;
-	var { authUser } = state;
-	var match = useRouteMatch();
 
+export default function PrivateRoute({ component: Component, ...rest }) {
+	let { store } = useContext(MainContext);
+	let [state] = store;
+	let { authUser } = state;
+	let match = useRouteMatch();
+	let history = useHistory();
 	return (
 		<Route
 			{...rest}
@@ -17,9 +17,14 @@ export default function PrivateRoute({ match, component: Component, ...rest }) {
 				return result ? (
 					<Component {...props} {...rest} />
 				) : (
-					<Redirect to='/login' />
+					history.push('/login')
 				);
 			}}
 		/>
 	);
+}
+
+export function checkAccessToRoute(route, user) {
+	if (!user) return false;
+	return true;
 }

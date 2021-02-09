@@ -1,15 +1,17 @@
-import {
-	Button,
-	Container,
-	makeStyles,
-	Tab,
-	Tabs,
-	Typography,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+/** React dependencies */
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+
+/**Material UI dependencies */
+import { Button, makeStyles, Tab, Tabs, Typography } from '@material-ui/core';
+
+/**App Components */
+import SearchIcon from '@material-ui/icons/Search';
 import HeaderContainer from '../Common/HeaderContainer';
+import { logoutUser } from '../../Model/Auth-Model';
+
+/**App Context */
+import { MainContext } from '../../Context/main-context';
 
 let useStyles = makeStyles({
 	headline: {
@@ -22,6 +24,8 @@ let useStyles = makeStyles({
 export default function ChatListHeader({ setMode }) {
 	let classes = useStyles();
 	let history = useHistory();
+	let { store } = useContext(MainContext);
+	let [state, dispatch] = store;
 
 	function handleChange(event, newValue) {}
 
@@ -44,6 +48,13 @@ export default function ChatListHeader({ setMode }) {
 					{...{ id: 'newChat', 'aria-controls': 'tabpanel 1' }}></Tab>
 				<Tab
 					label='Logout'
+					onClick={() => {
+						logoutUser();
+						history.push('/login');
+						dispatch({
+							type: 'LOGOUT_USER',
+						});
+					}}
 					{...{ id: 'logout', 'aria-controls': 'tabpanel 3' }}></Tab>
 			</Tabs>
 		</HeaderContainer>

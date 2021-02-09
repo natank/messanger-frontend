@@ -13,8 +13,8 @@ export default function UserItem({ user: userDetails, onUserSelected }) {
 		<ListItem button onClick={event => onUserSelected(userDetails.id)}>
 			<ListItemAvatar>
 				<Avatar
-					alt={userDetails.gender == 'm' ? 'male avatar' : 'female avatar'}
-					src={userDetails.gender == 'm' ? manAvatar : womanAvatar}
+					alt={userDetails.gender == 'male' ? 'male avatar' : 'female avatar'}
+					src={userDetails.gender == 'male' ? manAvatar : womanAvatar}
 				/>
 			</ListItemAvatar>
 			<ListItemText>

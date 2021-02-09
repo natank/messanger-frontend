@@ -54,19 +54,17 @@ export function MainContextProvider(props) {
 	useEffect(() => {
 		!users && loadData().then(data => setUsers(data.users));
 	});
-	var token = localStorage.getItem('token');
 	let currentChatDetails = undefined;
 	//chatDetails : {chatId , withUser, participants:{name, id}}
 	return (
-		<MainContext.Provider
-			value={{ authUser, users, store, currentChatDetails }}>
+		<MainContext.Provider value={{ users, store, currentChatDetails }}>
 			{props.children}
 		</MainContext.Provider>
 	);
 
 	async function loadData() {
 		let users = await getUsers();
-		return { users };
+		setUsers(users);
 	}
 }
 

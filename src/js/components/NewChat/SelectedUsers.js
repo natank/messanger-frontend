@@ -47,8 +47,8 @@ export default function SelectedUsers({
 							<ListItemAvatar>
 								<Avatar
 									className={classes.avatar}
-									alt={user.gender == 'm' ? 'male avatar' : 'female avatar'}
-									src={user.gender == 'm' ? manAvatar : womanAvatar}
+									alt={user.gender == 'male' ? 'male avatar' : 'female avatar'}
+									src={user.gender == 'male' ? manAvatar : womanAvatar}
 								/>
 							</ListItemAvatar>
 							<Typography variant='body1'>{user.username}</Typography>

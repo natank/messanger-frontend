@@ -1,3 +1,6 @@
+/**Utils */
+import { getToken } from '../Utils/utils';
+/**Data access */
 import messanger from '../API/messanger';
 
 let defaultMessages = [
@@ -93,5 +96,6 @@ export async function addMessage(props) {
 }
 
 export async function createChat({ members, name }) {
+	members = members.map(member => member.id);
 	messanger.post('/chat', { members, name });
 }

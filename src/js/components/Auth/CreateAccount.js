@@ -125,7 +125,13 @@ export default function CreateAccount(props) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			await createAccount({ username, password, passwordConfirmation, gender });
+			await createAccount({
+				username,
+				password,
+				passwordConfirmation,
+				gender,
+				memberStatus,
+			});
 			history.push('/');
 		} catch (err) {
 			setErrorMessage(err);
