@@ -21,3 +21,12 @@ export function authUserReducer(previousState, action) {
 			return previousState;
 	}
 }
+
+export function usersReducer(previousState, action) {
+	switch (action.type) {
+		case 'SET_USERS':
+			return action.payload;
+		default:
+			return previousState;
+	}
+}

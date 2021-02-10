@@ -6,8 +6,11 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 import App from './App';
 
+
+React
 const theme = createMuiTheme({
-	status: {
+	status: { 
+		/**fd */
 		danger: orange[500],
 	},
 });

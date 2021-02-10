@@ -8,7 +8,7 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../Model/user-model';
 
-import { authUserReducer, currentChatReducer } from '../Reducers/reducers';
+import { authUserReducer, currentChatReducer, usersReducer } from '../Reducers/reducers';
 
 export var MainContext = createContext();
 
@@ -33,31 +33,22 @@ export function MainContextProvider(props) {
 	const initialState = {
 		authUser: sessionUser || null,
 		currentChat: null,
+		users: null
 	};
 	const rootReducer = combineReducers({
 		authUser: authUserReducer,
 		currentChat: currentChatReducer,
+		users: usersReducer
 	});
 
 	const [state, dispatch] = useReducer(rootReducer, initialState);
 	const store = useMemo(() => [state, dispatch], [state]);
 
-	let { authUser } = state;
-	let [users, setUsers] = useState([]);
-	let history = useHistory();
 
-	useEffect(() => {
-		if (authUser != null) loadData();
-		else history.push('/');
-	}, [authUser]);
-
-	useEffect(() => {
-		!users && loadData().then(data => setUsers(data.users));
-	});
 	let currentChatDetails = undefined;
 	//chatDetails : {chatId , withUser, participants:{name, id}}
 	return (
-		<MainContext.Provider value={{ users, store, currentChatDetails }}>
+		<MainContext.Provider value={{ store, currentChatDetails }}>
 			{props.children}
 		</MainContext.Provider>
 	);
