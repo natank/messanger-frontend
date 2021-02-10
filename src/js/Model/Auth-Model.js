@@ -33,7 +33,6 @@ export async function loginUser({ username, password }) {
 	}
 	let { user, token } = response.data;
 	sessionStorage.setItem('token', token);
-	sessionStorage.setItem('user', user);
 	return { ...user };
 }
 
