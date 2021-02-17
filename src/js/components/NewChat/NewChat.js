@@ -44,13 +44,21 @@ let useStyles = makeStyles(theme => ({
 }));
 
 export default function NewChat() {
+	/**Hooks */
 	let classes = useStyles();
 	let history = useHistory();
-	let context = useContext(MainContext);
-	let [state, setState] = useState({
-		listUsers: context.users,
-		selectedUsers: [],
-	});
+
+	/**Context  */
+	let mainContext = useContext(MainContext);
+	let { store } = mainContext;
+
+	/**Global state */
+	let [state, dispatch] = store;
+	let { users } = state;
+
+	/**Local state */
+	let [selectedUsers, setSelectedUsers] = useState([]);
+	let [notSelectedUsers, setNotSelectedUsers] = useState(users);
 	let [mode, setMode] = useState('start'); /*search, subject */
 	let [groupName, setGroupName] = useState('');
 
@@ -70,18 +78,15 @@ export default function NewChat() {
 				</Container>
 			) : null}
 
-			<SelectedUsers selectedUsers={[...state.selectedUsers]} mode={mode} />
+			<SelectedUsers selectedUsers={[...selectedUsers]} mode={mode} />
 
 			{mode !== 'subject' ? (
-				<UserList
-					onUserSelected={onUserSelected}
-					users={state.listUsers ? [...state.listUsers] : []}
-				/>
+				<UserList onUserSelected={onUserSelected} users={notSelectedUsers} />
 			) : null}
 
 			{/**submit group button*/}
 
-			{state.selectedUsers.length > 0 && groupName.length > 0 ? (
+			{selectedUsers.length > 0 && groupName.length > 0 ? (
 				<Fab
 					color='secondary'
 					className={classes.submit}
@@ -96,7 +101,7 @@ export default function NewChat() {
 
 			{/**Clicking this button to continue to group subject button */}
 
-			{state.selectedUsers.length > 0 && mode !== 'subject' ? (
+			{selectedUsers.length > 0 && mode !== 'subject' ? (
 				<Fab
 					color='secondary'
 					className={classes.action}
@@ -109,22 +114,20 @@ export default function NewChat() {
 
 	async function onUserSelected(userId) {
 		let selectedUser = undefined;
-		let filteredListUsers = state.listUsers.filter(user => {
+		let filteredListUsers = notSelectedUsers.filter(user => {
 			if (user.id !== userId) return true;
 			else {
 				selectedUser = user;
 				return false;
 			}
 		});
-		let extendedSelectedUsers = [...state.selectedUsers, selectedUser];
-		setState({
-			listUsers: filteredListUsers,
-			selectedUsers: extendedSelectedUsers,
-		});
+		let extendedSelectedUsers = [...selectedUsers, selectedUser];
+		setSelectedUsers(extendedSelectedUsers);
+		setNotSelectedUsers(filteredListUsers);
 	}
 	async function submitNewChat() {
 		await Chat.createChat({
-			members: state.selectedUsers,
+			members: selectedUsers,
 			name: groupName,
 		});
 	}

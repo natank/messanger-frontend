@@ -17,20 +17,8 @@ export default function Login(props) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
-	const [user, setUser] = useState({ redirect: false, user: null });
 	var { store } = useContext(MainContext);
 	var [state, dispatch] = store;
-	useEffect(() => {
-		user.redirect &&
-			dispatch({
-				type: 'LOGIN_USER',
-				payload: user.user,
-			});
-	}, [user]);
-
-	useEffect(() => {
-		user.redirect && history.push('/');
-	});
 
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -83,11 +71,11 @@ export default function Login(props) {
 		e.preventDefault();
 		try {
 			var user = await loginUser({ username, password });
-			// Save the user in the session storage
-			sessionStorage.setItem('user', JSON.stringify(user));
-			setUser({
-				redirect: true,
-				user,
+
+			// Dispatch the user
+			dispatch({
+				type: 'LOGIN_USER',
+				payload: user,
 			});
 		} catch (err) {
 			setErrorMessage(err.errorMessage[0].msg);
