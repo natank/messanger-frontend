@@ -62,7 +62,13 @@ let defaultChats = [
 ];
 
 export async function getChats(props) {
-	return defaultChats
+	try {
+		var response = await messanger.get( "/chat")
+		var chats = respons.data;
+	} catch (error) {
+		
+	}
+	return chats
 }
 
 export async function getChat(props) {
