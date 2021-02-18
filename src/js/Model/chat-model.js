@@ -36,31 +36,33 @@ let defaultMessages = [
 	},
 ];
 
+let defaultChats = [
+	{
+		chatId: '123',
+		chatName: 'JR Devs',
+		latestMessage: { username: 'Gal', text: 'Hi there Group' },
+		participants: [
+			{ username: 'Dalit', userId: '123' },
+			{ username: 'Gil', userId: '776' },
+			{ username: 'Tali', userId: '734' },
+		],
+	}, // Group chat
+	{
+		chatId: '456',
+		withUser: { userId: 'abc', gender: 'm', username: 'Dan' },
+		latestMessage: {
+			username: 'Amit',
+			text: 'Welcome to the club, Private chat',
+		},
+	}, // Private
+	{
+		chatId: undefined,
+		withUser: { userId: 'defgeddd', gender: 'm', username: 'Ben' },
+	}, // Private, no chats yet
+];
+
 export async function getChats(props) {
-	return [
-		{
-			chatId: '123',
-			chatName: 'JR Devs',
-			latestMessage: { username: 'Gal', text: 'Hi there Group' },
-			participants: [
-				{ username: 'Dalit', userId: '123' },
-				{ username: 'Gil', userId: '776' },
-				{ username: 'Tali', userId: '734' },
-			],
-		}, // Group chat
-		{
-			chatId: '456',
-			withUser: { userId: 'abc', gender: 'm', username: 'Dan' },
-			latestMessage: {
-				username: 'Amit',
-				text: 'Welcome to the club, Private chat',
-			},
-		}, // Private
-		{
-			chatId: undefined,
-			withUser: { userId: 'defgeddd', gender: 'm', username: 'Ben' },
-		}, // Private, no chats yet
-	];
+	return defaultChats
 }
 
 export async function getChat(props) {
