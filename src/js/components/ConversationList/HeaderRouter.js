@@ -1,8 +1,8 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { useState } from 'react';
-import ChatHeader from './ChatListHeader';
-import ChatFindHeader from '../Common/ChatFindHeader';
+import ChatHeader from './ConversationListHeader';
+import ChatFindHeader from '../Common/ConversationFindHeader';
 
 export default function HeaderRouter() {
 	let [mode, setMode] = useState('chats');

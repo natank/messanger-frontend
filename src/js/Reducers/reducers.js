@@ -1,10 +1,10 @@
 import ItemsCollection from './ItemsCollection';
 
-export function currentChatReducer(previousState, action) {
+export function currentConversationReducer(previousState, action) {
 	switch (action.type) {
-		case 'SET_CURRENT_CHAT':
+		case 'SET_CURRENT_CONVERSATION':
 			return action.payload;
-		case 'RESET_CURRENT_CHAT':
+		case 'RESET_CURRENT_CONVERSATION':
 			return null;
 		default:
 			return previousState;
@@ -40,18 +40,20 @@ export function usersReducer(previousState, action) {
 	}
 }
 
-export function chatsReducer(previousState, action) {
+export function conversationsReducer(previousState, action) {
 	switch (action.type) {
 		case 'LOGIN_USER':
 			return null;
-		case 'ADD_CHATS':
-			let chats;
+		case 'ADD_CONVERSATIONS':
+			let conversations;
 			if (!previousState) {
-				chats = [...action.payload];
+				conversations = [...action.payload];
 			} else {
-				chats = [...previousState, ...action.payload];
+				conversations = Array.isArray(action.payload)
+					? [...previousState, ...action.payload]
+					: [...previousState, action.payload];
 			}
-			return chats;
+			return conversations;
 		default:
 			return previousState;
 	}

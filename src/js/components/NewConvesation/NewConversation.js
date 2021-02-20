@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 
 /**app components */
-import Header from './NewChatHeader';
+import Header from './NewConversationHeader';
 import SelectedUsers from './SelectedUsers';
 import UserList from './UserList';
 
@@ -18,7 +18,7 @@ import { MainContext } from '../../Context/main-context';
 
 /**Models */
 import * as User from '../../Model/user-model';
-import * as Chat from '../../Model/chat-model';
+import * as Conversation from '../../Model/conversation-model';
 
 let useStyles = makeStyles(theme => ({
 	root: {
@@ -43,7 +43,7 @@ let useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function NewChat() {
+export default function NewConversation() {
 	/**Hooks */
 	let classes = useStyles();
 	let history = useHistory();
@@ -54,7 +54,7 @@ export default function NewChat() {
 
 	/**Global state */
 	let [state, dispatch] = store;
-	let { users } = state;
+	let { users, authUser } = state;
 
 	/**Local state */
 	let [selectedUsers, setSelectedUsers] = useState([]);
@@ -91,7 +91,7 @@ export default function NewChat() {
 					color='secondary'
 					className={classes.submit}
 					onClick={() => {
-						submitNewChat()
+						submitNewConversation()
 							.then(() => history.push('/'))
 							.catch(err => console.log(err));
 					}}>
@@ -125,10 +125,19 @@ export default function NewChat() {
 		setSelectedUsers(extendedSelectedUsers);
 		setNotSelectedUsers(filteredListUsers);
 	}
-	async function submitNewChat() {
-		await Chat.createChat({
-			members: selectedUsers,
+	async function submitNewConversation() {
+		const conversation = {
+			members: [...selectedUsers, authUser],
 			name: groupName,
+		};
+		try {
+			await Conversation.createConversation(conversation);
+		} catch (error) {
+			console.log(error);
+		}
+		dispatch({
+			type: 'ADD_CONVERSATIONS',
+			payload: conversation,
 		});
 	}
 }

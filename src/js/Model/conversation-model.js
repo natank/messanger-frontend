@@ -61,23 +61,31 @@ let defaultChats = [
 	}, // Private, no chats yet
 ];
 
-export async function getChats(props) {
+/**Get all the conversation user participated in */
+export async function getConversations(userId) {
 	try {
-		var response = await messanger.get( "/chat")
-		var chats = respons.data;
+		var response = await messanger.get(
+			`/users/conversations/?userId=${userId}`,
+			{
+				headers: {
+					Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+				},
+			}
+		);
+		var conversations = response.data.conversations;
 	} catch (error) {
-		
+		throw error;
 	}
-	return chats
+	return conversations;
 }
 
-export async function getChat(props) {
-	let { chatId, userId, withUserId } = props;
-	// chat already exist
-	if (chatId) {
+export async function getConversation(props) {
+	let { conversationId, userId, withUserId } = props;
+	// conversation already exist
+	if (conversationId) {
 	} else {
-		// chat doesn't exsist
-		// create new private chat between userId and withUserId
+		// conversation doesn't exsist
+		// create new private conversation between userId and withUserId
 	}
 
 	return [
@@ -87,7 +95,7 @@ export async function getChat(props) {
 	];
 }
 
-export async function getChatMessages(chatDetails, authUser) {
+export async function getConversationMessages(chatDetails, authUser) {
 	//chatDetails : {chatId , withUser}
 	// let { chatId, withUSer } = chatDetails;
 	// if (chatId) {
@@ -103,7 +111,16 @@ export async function addMessage(props) {
 	return;
 }
 
-export async function createChat({ members, name }) {
+export async function createConversation({ members, name }) {
 	members = members.map(member => member.id);
-	messanger.post('/chat', { members, name });
+	let response = await messanger.post(
+		'/conversations',
+		{ members, name },
+		{
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+			},
+		}
+	);
+	return response;
 }

@@ -1,13 +1,13 @@
 import React, { useReducer, createContext, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../Model/user-model';
-import { getChats } from '../Model/chat-model';
+import { getConversations } from '../Model/conversation-model';
 
 import {
 	authUserReducer,
-	currentChatReducer,
+	currentConversationReducer,
 	usersReducer,
-	chatsReducer,
+	conversationsReducer,
 } from '../Reducers/reducers';
 import { loginUser } from '../Model/Auth-Model';
 
@@ -28,15 +28,15 @@ export function MainContextProvider(props) {
 	let user = JSON.parse(sessionStorage.getItem('user'));
 	const initialState = {
 		authUser: user,
-		currentChat: null,
+		currentConversation: null,
 		users: null,
-		chats: null,
+		conversations: null,
 	};
 	const rootReducer = combineReducers({
 		authUser: authUserReducer,
-		currentChat: currentChatReducer,
+		currentConversation: currentConversationReducer,
 		users: usersReducer,
-		chats: chatsReducer,
+		conversations: conversationsReducer,
 	});
 
 	const [state, dispatch] = useReducer(rootReducer, initialState);
@@ -51,7 +51,7 @@ export function MainContextProvider(props) {
 		}
 	}, [authUser]);
 
-	//chatDetails : {chatId , withUser, participants:{name, id}}
+	//conversationDetails : {conversationId , withUser, participants:{name, id}}
 	return (
 		<MainContext.Provider value={{ store }}>
 			{props.children}
@@ -60,14 +60,9 @@ export function MainContextProvider(props) {
 
 	async function loadData() {
 		let users = await getUsers();
-		let chats = await getChats();
 		dispatch({
 			type: 'ADD_USERS',
 			payload: users,
-		});
-		dispatch({
-			type: 'ADD_CHATS',
-			payload: chats,
 		});
 	}
 }

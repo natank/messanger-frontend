@@ -1,4 +1,4 @@
-import messanger from '../API/messanger';
+import messanger, { getToken } from '../API/messanger';
 
 export async function createAccount({
 	username,
@@ -34,7 +34,7 @@ export async function loginUser({ username, password }) {
 	let { user, token } = response.data;
 	sessionStorage.setItem('token', token);
 	sessionStorage.setItem('user', JSON.stringify(user));
-
+	getToken();
 	return user;
 }
 

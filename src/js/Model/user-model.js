@@ -9,7 +9,11 @@ let defaultUsers = [
 
 export async function getUsers() {
 	try {
-		let response = await messanger.get('/users');
+		let response = await messanger.get('/users', {
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+			},
+		});
 		var users = response.data.users;
 		return users;
 	} catch (error) {

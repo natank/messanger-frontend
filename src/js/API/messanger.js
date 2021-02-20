@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-const token = getToken();
+let token;
+
 export default axios.create({
 	baseURL: 'http://localhost:8080',
-	headers: {
-		Authorization: `Bearer ${token}`,
-	},
 });
-function getToken() {
+export function getToken() {
 	return sessionStorage.getItem('token');
 }

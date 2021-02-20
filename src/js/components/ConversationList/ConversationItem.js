@@ -7,63 +7,66 @@ import manAvatar from '../../../images/man.png';
 import groupAvatar from '../../../images/group.png';
 import { MainContext } from '../../Context/main-context';
 
-export default function ChatItem({ chatDetails }) {
-	let [isCurrentChat, setIsCurrentChat] = useState(false);
+export default function ConversationItem({ conversationDetails }) {
+	let [isCurrentConversation, setIsCurrentConversation] = useState(false);
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentChat } = state;
+	let { currentConversation } = state;
 
 	useEffect(() => {
-		if (isCurrentChat) {
+		if (isCurrentConversation) {
 			dispatch({
-				type: 'SET_CURRENT_CHAT',
-				payload: chatDetails,
+				type: 'SET_CURRENT_CONVERSATION',
+				payload: conversationDetails,
 			});
 		}
-	}, [isCurrentChat]);
+	}, [isCurrentConversation]);
 
 	useEffect(() => {
 		if (
-			isCurrentChat &&
-			currentChat &&
-			currentChat.chatId == chatDetails.chatId
+			isCurrentConversation &&
+			currentConversation &&
+			currentConversation.conversationId == conversationDetails.conversationId
 		) {
 			history.push('/feed');
 		}
 	});
 
-	if (chatDetails.chatName) {
+	if (conversationDetails.name) {
 		var avatarSrc = groupAvatar;
 		var avatarAlt = 'group avatar';
-		var chatName = chatDetails.chatName;
-	} else if (chatDetails.withUser && chatDetails.withUser.gender == 'f') {
+		var conversationName = conversationDetails.name;
+	} else if (
+		conversationDetails.withUser &&
+		conversationDetails.withUser.gender == 'f'
+	) {
 		avatarSrc = womanAvatar;
 		avatarAlt = 'woman avatar';
-		chatName = chatDetails.withUser.username;
+		conversationName = conversationDetails.withUser.username;
 	} else {
 		avatarSrc = manAvatar;
 		avatarAlt = 'man avatar';
-		chatName = chatDetails.withUser.username;
+		conversationName = conversationDetails.withUser.username;
 	}
 	let history = useHistory();
 
 	return (
-		<ListItem button onClick={onChatClick}>
+		<ListItem button onClick={onConversationClick}>
 			<ListItemAvatar>
 				<Avatar alt={avatarAlt} src={avatarSrc} />
 			</ListItemAvatar>
 			<ListItemText>
-				<h2>{chatName}</h2>
+				<h2>{conversationName}</h2>
 				<p>
-					{chatDetails.latestMessage
-						? `${chatDetails.latestMessage.username}: ${chatDetails.latestMessage.text}`
+					{conversationDetails.latestMessage
+						? `${conversationDetails.latestMessage.username}: ${conversationDetails.latestMessage.text}`
 						: null}
 				</p>
 			</ListItemText>
 		</ListItem>
 	);
 
-	function onChatClick() {
-		setIsCurrentChat(true);
+	function onConversationClick() {
+		setIsCurrentConversation(true);
 	}
 }

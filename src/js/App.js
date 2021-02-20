@@ -8,6 +8,7 @@ import Login from './components/Auth/Login';
 import CreateAccount from './components/Auth/CreateAccount';
 import Main from './Views/main-view';
 import { Container, makeStyles } from '@material-ui/core';
+import ErrorBoundary from './Views/errorBoundry';
 
 const useStyles = makeStyles({
 	appContainer: {
@@ -16,6 +17,14 @@ const useStyles = makeStyles({
 });
 
 export default function App() {
+	return (
+		<ErrorBoundary FallbackComponent={Login}>
+			<DefaultComponent />
+		</ErrorBoundary>
+	);
+}
+
+function DefaultComponent() {
 	let classes = useStyles();
 	return (
 		<ThemeProvider theme={theme}>

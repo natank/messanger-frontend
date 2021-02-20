@@ -8,8 +8,8 @@ import Footer from '../components/Footer';
 
 /**App components */
 import PrivateRoute from '../components/Auth/PrivateRoute';
-import Chats from '../components/ChatList/ChatsList';
-import NewChat from '../components/NewChat/NewChat';
+import Conversations from '../components/ConversationList/ConversationsList';
+import NewConversation from '../components/NewConvesation/NewConversation';
 import Feed from '../components/Feed/Feed';
 import Login from '../components/Auth/Login';
 
@@ -22,13 +22,6 @@ let useStyles = makeStyles(theme => ({
 	},
 }));
 function MainView(props) {
-	console.log(props);
-	var {
-		membersManagementUrl,
-		moviesManagementUrl,
-		usersManagementUrl,
-	} = useContext(MainContext);
-
 	var classes = useStyles();
 	return (
 		<Container
@@ -38,10 +31,10 @@ function MainView(props) {
 			maxWidth={false}>
 			<Switch>
 				<Route exact path='/'>
-					<PrivateRoute {...{ component: Chats }} />
+					<PrivateRoute {...{ component: Conversations }} />
 				</Route>
 				<Route path='/new'>
-					<PrivateRoute {...{ component: NewChat }} />
+					<PrivateRoute {...{ component: NewConversation }} />
 				</Route>
 				<Route path='/feed'>
 					<PrivateRoute {...{ component: Feed }} />
