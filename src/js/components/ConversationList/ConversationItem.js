@@ -14,21 +14,12 @@ export default function ConversationItem({ conversationDetails }) {
 	let { currentConversation } = state;
 
 	useEffect(() => {
-		if (isCurrentConversation) {
-			dispatch({
-				type: 'SET_CURRENT_CONVERSATION',
-				payload: conversationDetails,
-			});
-		}
-	}, [isCurrentConversation]);
-
-	useEffect(() => {
 		if (
 			isCurrentConversation &&
 			currentConversation &&
-			currentConversation.conversationId == conversationDetails.conversationId
+			currentConversation._id == conversationDetails._id
 		) {
-			history.push('/feed');
+			// history.push('/feed');
 		}
 	});
 
@@ -38,7 +29,7 @@ export default function ConversationItem({ conversationDetails }) {
 		var conversationName = conversationDetails.name;
 	} else if (
 		conversationDetails.withUser &&
-		conversationDetails.withUser.gender == 'f'
+		conversationDetails.withUser.gender == 'female'
 	) {
 		avatarSrc = womanAvatar;
 		avatarAlt = 'woman avatar';
@@ -67,6 +58,9 @@ export default function ConversationItem({ conversationDetails }) {
 	);
 
 	function onConversationClick() {
-		setIsCurrentConversation(true);
+		dispatch({
+			type: 'SET_CURRENT_CONVERSATION',
+			payload: conversationDetails,
+		});
 	}
 }

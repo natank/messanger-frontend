@@ -1,18 +1,24 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { useState } from 'react';
-import ChatHeader from './ConversationListHeader';
-import ChatFindHeader from '../Common/ConversationFindHeader';
+import ConversationHeader from './ConversationListHeader';
+import ConversationFindHeader from '../Common/ConversationFindHeader';
 
-export default function HeaderRouter() {
-	let [mode, setMode] = useState('chats');
+export default function HeaderRouter({ onFilterChanged }) {
+	let [mode, setMode] = useState('conversations');
 	switch (mode) {
-		case 'chats':
-			return <ChatHeader setMode={setMode} />;
+		case 'conversations':
+			return <ConversationHeader setMode={setMode} />;
 			break;
 		case 'search':
-			return <ChatFindHeader setMode={setMode} prevMode='chats' />;
-		case 'chats-find':
+			return (
+				<ConversationFindHeader
+					setMode={setMode}
+					onFilterChanged={onFilterChanged}
+					prevMode='conversations'
+				/>
+			);
+		case 'conversations-find':
 			return;
 		default:
 			return null;

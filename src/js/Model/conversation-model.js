@@ -62,17 +62,18 @@ let defaultChats = [
 ];
 
 /**Get all the conversation user participated in */
-export async function getConversations(userId) {
+export async function getConversations({ userId, filter }) {
 	try {
-		var response = await messanger.get(
-			`/users/conversations/?userId=${userId}`,
-			{
-				headers: {
-					Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-				},
-			}
-		);
-		var conversations = response.data.conversations;
+		var response = await messanger.get(`/users/conversations`, {
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+			},
+			params: {
+				filter,
+				userId,
+			},
+		});
+		var conversations = response.data;
 	} catch (error) {
 		throw error;
 	}

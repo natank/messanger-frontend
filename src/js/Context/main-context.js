@@ -1,7 +1,6 @@
 import React, { useReducer, createContext, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../Model/user-model';
-import { getConversations } from '../Model/conversation-model';
 
 import {
 	authUserReducer,
@@ -9,7 +8,6 @@ import {
 	usersReducer,
 	conversationsReducer,
 } from '../Reducers/reducers';
-import { loginUser } from '../Model/Auth-Model';
 
 export var MainContext = createContext();
 
@@ -42,7 +40,7 @@ export function MainContextProvider(props) {
 	const [state, dispatch] = useReducer(rootReducer, initialState);
 	const store = useMemo(() => [state, dispatch], [state]);
 
-	let { authUser } = state;
+	let { authUser, currentConversation } = state;
 	let history = useHistory();
 	useEffect(() => {
 		if (authUser) {
@@ -51,6 +49,9 @@ export function MainContextProvider(props) {
 		}
 	}, [authUser]);
 
+	useEffect(() => {
+		if (currentConversation) history.push('/feed');
+	}, [currentConversation]);
 	//conversationDetails : {conversationId , withUser, participants:{name, id}}
 	return (
 		<MainContext.Provider value={{ store }}>

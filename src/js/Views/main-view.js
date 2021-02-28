@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { MainContext } from '../Context/main-context';
-import { Container, Grid } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 import Footer from '../components/Footer';
 
@@ -11,7 +10,6 @@ import PrivateRoute from '../components/Auth/PrivateRoute';
 import Conversations from '../components/ConversationList/ConversationsList';
 import NewConversation from '../components/NewConvesation/NewConversation';
 import Feed from '../components/Feed/Feed';
-import Login from '../components/Auth/Login';
 
 let useStyles = makeStyles(theme => ({
 	root: {
@@ -21,8 +19,10 @@ let useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 	},
 }));
+
 function MainView(props) {
 	var classes = useStyles();
+
 	return (
 		<Container
 			id='siteContainer'

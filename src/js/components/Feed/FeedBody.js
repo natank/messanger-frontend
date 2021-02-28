@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import FeedMessage from './FeedMessage';
 import { MainContext } from '../../Context/main-context';
-import * as Convesation from '../../Model/conversation-model';
+import * as Conversation from '../../Model/conversation-model';
 
 let useStyles = makeStyles({
 	root: {
@@ -22,7 +22,7 @@ export default function FeedBody() {
 	let { currentConversationDetails, authUser } = useContext(MainContext);
 	useEffect(() => {
 		if (!messages) {
-			Chat.getChatMessages(currentConversationDetails, authUser)
+			Conversation.getConversationMessages(currentConversationDetails, authUser)
 				.then(result => {
 					setMessages(result);
 				})

@@ -18,8 +18,8 @@ export default function Feed() {
 	let history = useHistory();
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentChat } = state;
-	if (!currentChat) {
+	let { currentConversation } = state;
+	if (!currentConversation) {
 		history.push('/');
 		return null;
 	}

@@ -21,7 +21,7 @@ let useStyles = makeStyles({
 	},
 });
 
-export default function ChatListHeader({ setMode }) {
+export default function ConversationListHeader({ setMode }) {
 	let classes = useStyles();
 	let history = useHistory();
 	let { store } = useContext(MainContext);
@@ -37,15 +37,18 @@ export default function ChatListHeader({ setMode }) {
 					<SearchIcon />
 				</Button>
 			</div>
-			<Tabs value={0} onChange={handleChange} aria-label='chat header tabs'>
+			<Tabs
+				value={0}
+				onChange={handleChange}
+				aria-label='conversation header tabs'>
 				<Tab
-					label='Chats'
-					{...{ id: 'chat', 'aria-controls': 'tabpanel 2' }}
+					label='Conversations'
+					{...{ id: 'conversation', 'aria-controls': 'tabpanel 2' }}
 					value={0}></Tab>
 				<Tab
-					label='New Chat'
+					label='New Conversation'
 					onClick={() => history.push('/new')}
-					{...{ id: 'newChat', 'aria-controls': 'tabpanel 1' }}></Tab>
+					{...{ id: 'newConversation', 'aria-controls': 'tabpanel 1' }}></Tab>
 				<Tab
 					label='Logout'
 					onClick={() => {

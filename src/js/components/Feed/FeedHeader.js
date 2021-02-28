@@ -25,16 +25,16 @@ export default function FeedHeader({ setMode }) {
 	let history = useHistory();
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentChat } = state;
+	let { currentConversation } = state;
 
 	function handleChange(event, newValue) {}
 
-	let chatTitle = currentChat.chatName
-		? currentChat.chatName
-		: currentChat.withUser.username;
-	let chatParticipants = currentChat.participants
-		? currentChat.participants
-				.map(participant => participant.username)
+	let conversationTitle = currentConversation.name
+		? currentConversation.name
+		: currentConversation.withUser.username;
+	let conversationParticipants = currentConversation.members
+		? currentConversation.members
+				.map(member => member.username)
 				.toString()
 				.replace(',', ', ')
 		: null;
@@ -45,9 +45,11 @@ export default function FeedHeader({ setMode }) {
 			</Button>
 			<Avatar alt='woman avatar' src={womanAvatar} />
 			<Container>
-				<Typography variant='subtitle1'>{chatTitle}</Typography>
-				{chatParticipants ? (
-					<Typography variant='subtitle2'>{chatParticipants}</Typography>
+				<Typography variant='subtitle1'>{conversationTitle}</Typography>
+				{conversationParticipants ? (
+					<Typography variant='subtitle2'>
+						{conversationParticipants}
+					</Typography>
 				) : null}
 			</Container>
 		</Container>
