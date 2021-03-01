@@ -41,7 +41,9 @@ export default function FeedHeader({ setMode }) {
 	return (
 		<Container disableGutters className={classes.root}>
 			<Button color='inherit'>
-				<ArrowBack onClick={() => history.push('/')} />
+				<ArrowBack onClick={() => {
+					 history.push('/')
+				}} />
 			</Button>
 			<Avatar alt='woman avatar' src={womanAvatar} />
 			<Container>
