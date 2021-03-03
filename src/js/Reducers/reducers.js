@@ -1,5 +1,3 @@
-import ItemsCollection from './ItemsCollection';
-
 export function currentConversationReducer(previousState, action) {
 	switch (action.type) {
 		case 'SET_CURRENT_CONVERSATION':

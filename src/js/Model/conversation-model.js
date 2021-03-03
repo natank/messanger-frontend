@@ -96,14 +96,15 @@ export async function getConversation(props) {
 	];
 }
 
-export async function getConversationMessages(chatDetails, authUser) {
+export async function getConversationMessages(conversationDetails, authUser) {
 	//chatDetails : {chatId , withUser}
-	// let { chatId, withUSer } = chatDetails;
-	// if (chatId) {
-	// 	/*get the chat messages from the db*/
-	// } else {
-	// 	/* get the messages between the current user and withUser*/
-	// }
+	const { conversationId, withUSer } = conversationDetails;
+	if (conversationId) {
+		/*get the chat messages from the db*/
+		const response = await messanger.get('/conversations');
+	} else {
+		/* get the messages between the current user and withUser*/
+	}
 	return defaultMessages;
 }
 

@@ -19,10 +19,10 @@ let useStyles = makeStyles({
 export default function FeedBody() {
 	let classes = useStyles();
 	let [messages, setMessages] = useState(null);
-	let { currentConversationDetails, authUser } = useContext(MainContext);
+	let { currentConversation, authUser } = useContext(MainContext);
 	useEffect(() => {
 		if (!messages) {
-			Conversation.getConversationMessages(currentConversationDetails, authUser)
+			Conversation.getConversationMessages(conversationDetails, authUser)
 				.then(result => {
 					setMessages(result);
 				})
