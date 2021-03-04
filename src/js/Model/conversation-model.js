@@ -98,10 +98,20 @@ export async function getConversation(props) {
 
 export async function getConversationMessages(conversationDetails, authUser) {
 	//chatDetails : {chatId , withUser}
-	const { conversationId, withUSer } = conversationDetails;
+	const { _id: conversationId, withUSer } = conversationDetails;
 	if (conversationId) {
 		/*get the chat messages from the db*/
-		const response = await messanger.get('/conversations');
+		try {
+			const response = await messanger.get(`/conversations/${conversationId}`, {
+				headers: {
+					Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+				}
+			});
+			console.log(response)
+			return response.data.conversation.messages;
+		} catch (error) {
+			throw(error)
+		}
 	} else {
 		/* get the messages between the current user and withUser*/
 	}

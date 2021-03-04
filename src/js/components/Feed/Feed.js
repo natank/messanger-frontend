@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { MainContext } from '../../Context/main-context';
 import FeedBody from './FeedBody';
 import FeedHeader from './FeedHeader';
+import FeedNewMessage from './FeedNewMessage'
 
 let useStyles = makeStyles({
 	root: {
@@ -27,6 +28,7 @@ export default function Feed() {
 		<Container disableGutters className={classes.root}>
 			<FeedHeader />
 			<FeedBody />
+			<FeedNewMessage />
 		</Container>
 	);
 }
