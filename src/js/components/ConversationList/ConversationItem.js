@@ -6,12 +6,13 @@ import womanAvatar from '../../../images/woman.png';
 import manAvatar from '../../../images/man.png';
 import groupAvatar from '../../../images/group.png';
 import { MainContext } from '../../Context/main-context';
+import * as Conversation from '../../Model/conversation-model';
 
 export default function ConversationItem({ conversationDetails }) {
 	let [isCurrentConversation, setIsCurrentConversation] = useState(false);
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentConversation } = state;
+	let { currentConversation, authUser } = state;
 
 	useEffect(() => {
 		if (
@@ -57,10 +58,20 @@ export default function ConversationItem({ conversationDetails }) {
 		</ListItem>
 	);
 
-	function onConversationClick() {
-		dispatch({
-			type: 'SET_CURRENT_CONVERSATION',
-			payload: conversationDetails,
-		});
+	async function onConversationClick() {
+		//get the current conversation from DB
+
+		try {
+			let conversation = await Conversation.getConversation({
+				conversationId: conversationDetails._id,
+				userId: authUser.id,
+			});
+			dispatch({
+				type: 'SET_CURRENT_CONVERSATION',
+				payload: conversation,
+			});
+		} catch (error) {
+			throw error;
+		}
 	}
 }

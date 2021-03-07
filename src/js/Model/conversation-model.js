@@ -84,9 +84,26 @@ export async function getConversation(props) {
 	let { conversationId, userId, withUserId } = props;
 	// conversation already exist
 	if (conversationId) {
+		try {
+			const response = await messanger.get(
+				`/users/conversations/${conversationId}`,
+				{
+					headers: {
+						Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+					},
+					params: {
+						userId,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			throw error;
+		}
 	} else {
 		// conversation doesn't exsist
 		// create new private conversation between userId and withUserId
+		throw "conversation doesen't exist";
 	}
 
 	return [
@@ -105,22 +122,16 @@ export async function getConversationMessages(conversationDetails, authUser) {
 			const response = await messanger.get(`/conversations/${conversationId}`, {
 				headers: {
 					Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-				}
+				},
 			});
-			console.log(response)
 			return response.data.conversation.messages;
 		} catch (error) {
-			throw(error)
+			throw error;
 		}
 	} else {
 		/* get the messages between the current user and withUser*/
 	}
 	return defaultMessages;
-}
-
-export async function addMessage(props) {
-	let { message, chatId, fromUserId, toUserId } = props;
-	return;
 }
 
 export async function createConversation({ members, name }) {
@@ -135,4 +146,24 @@ export async function createConversation({ members, name }) {
 		}
 	);
 	return response;
+}
+
+export async function createMessage({ conversationId, authorId, text }) {
+	try {
+		let response = await messanger.post(
+			`/conversations/${conversationId}/createMessage`,
+			{
+				authorId,
+				text,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+				},
+			}
+		);
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 }

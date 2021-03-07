@@ -4,6 +4,11 @@ export function currentConversationReducer(previousState, action) {
 			return action.payload;
 		case 'RESET_CURRENT_CONVERSATION':
 			return null;
+		case 'ADD_MESSAGE':
+			const newState = { ...previousState };
+			newState.messages = [...newState.messages, action.payload];
+			return newState;
+
 		default:
 			return previousState;
 	}
