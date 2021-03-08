@@ -47,18 +47,39 @@ export default function ConversationItem({ conversationDetails }) {
 
 	async function onConversationClick() {
 		//get the current conversation from DB
+		if(conversationDetails._id)  await handleGroupConversation()// existing conversation
+		else if(conversationDetails.withUser) handlePrivateConversation()
+		else {
+			throw "conversation doesn't exist"
+		}
 
-		try {
-			let conversation = await Conversation.getConversation({
-				conversationId: conversationDetails._id,
-				userId: authUser.id,
-			});
+		async function handleGroupConversation(){
+			try {
+				let conversation = await Conversation.getConversation({
+					conversationId: conversationDetails._id,
+					userId: authUser.id,
+				});
+				dispatch({
+					type: 'SET_CURRENT_CONVERSATION',
+					payload: conversation,
+				});
+			} catch (error) {
+				throw error;
+			}
+		}
+		 
+		function handlePrivateConversation(){
+			const conversation = {
+				withUser: conversationDetails.withUser
+			}
 			dispatch({
 				type: 'SET_CURRENT_CONVERSATION',
 				payload: conversation,
 			});
-		} catch (error) {
-			throw error;
-		}
+		} 
+
+		
+
+		
 	}
 }
