@@ -1,8 +1,6 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import FeedMessage from './FeedMessage';
-import { MainContext } from '../../Context/main-context';
-import * as Conversation from '../../Model/conversation-model';
 
 let useStyles = makeStyles({
 	root: {
@@ -24,10 +22,6 @@ let useStyles = makeStyles({
 
 export default function FeedBody({ messages }) {
 	const classes = useStyles();
-
-	const { store } = useContext(MainContext);
-	const [state, dispatch] = store;
-	const { currentConversation, authUser } = state;
 
 	const messageRef = useRef();
 

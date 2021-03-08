@@ -1,6 +1,5 @@
 import { ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import womanAvatar from '../../../images/woman.png';
 import manAvatar from '../../../images/man.png';
@@ -9,20 +8,9 @@ import { MainContext } from '../../Context/main-context';
 import * as Conversation from '../../Model/conversation-model';
 
 export default function ConversationItem({ conversationDetails }) {
-	let [isCurrentConversation, setIsCurrentConversation] = useState(false);
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentConversation, authUser } = state;
-
-	useEffect(() => {
-		if (
-			isCurrentConversation &&
-			currentConversation &&
-			currentConversation._id == conversationDetails._id
-		) {
-			// history.push('/feed');
-		}
-	});
+	let { authUser } = state;
 
 	if (conversationDetails.name) {
 		var avatarSrc = groupAvatar;
@@ -40,7 +28,6 @@ export default function ConversationItem({ conversationDetails }) {
 		avatarAlt = 'man avatar';
 		conversationName = conversationDetails.withUser.username;
 	}
-	let history = useHistory();
 
 	return (
 		<ListItem button onClick={onConversationClick}>

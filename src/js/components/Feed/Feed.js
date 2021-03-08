@@ -24,16 +24,13 @@ export default function Feed() {
 	const { store } = useContext(MainContext);
 	const [state, dispatch] = store;
 	const { currentConversation, authUser } = state;
-	const [messages, setMessages] = useState(null);
 
 	if (!currentConversation) {
 		history.push('/');
 		return null;
 	}
 
-	useEffect(() => {
-		setMessages(currentConversation.messages);
-	}, [currentConversation]);
+	const { messages } = currentConversation;
 
 	async function createMessage({ message }) {
 		const conversationId = currentConversation._id;
@@ -60,7 +57,7 @@ export default function Feed() {
 	return (
 		<Container disableGutters className={classes.root}>
 			<FeedHeader />
-			<FeedBody createMessage={messages} />
+			<FeedBody messages={messages} />
 			<FeedNewMessage createMessage={createMessage} />
 		</Container>
 	);
