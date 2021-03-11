@@ -148,13 +148,14 @@ export async function createConversation({ members, name }) {
 	return response;
 }
 
-export async function createMessage({ conversationId, authorId, text }) {
+export async function createMessage({ conversationId, authorId, text, withUserId }) {
 	try {
 		let response = await messanger.post(
 			`/conversations/${conversationId}/createMessage`,
 			{
 				authorId,
 				text,
+				withUserId
 			},
 			{
 				headers: {

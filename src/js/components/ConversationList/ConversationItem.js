@@ -68,9 +68,10 @@ export default function ConversationItem({ conversationDetails }) {
 			}
 		}
 		 
-		function handlePrivateConversation(){
+		async function handlePrivateConversation(){
 			const conversation = {
-				withUser: conversationDetails.withUser
+				withUser: conversationDetails.withUser,
+				messages: []
 			}
 			dispatch({
 				type: 'SET_CURRENT_CONVERSATION',

@@ -33,13 +33,12 @@ export default function Feed() {
 	const { messages } = currentConversation;
 
 	async function createMessage({ message }) {
-		const conversationId = currentConversation._id;
-		const authorId = authUser.id;
 		try {
 			await Conversation.createMessage({
-				conversationId,
-				authorId,
+				conversationId: currentConversation._id,
+				authorId: authUser.id,
 				text: message,
+				withUserId: currentConversation.withUser._id
 			});
 			dispatch({
 				type: 'ADD_MESSAGE',
