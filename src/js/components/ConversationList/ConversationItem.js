@@ -16,19 +16,20 @@ export default function ConversationItem({ conversationDetails }) {
 		var avatarSrc = groupAvatar;
 		var avatarAlt = 'group avatar';
 		var conversationName = conversationDetails.name;
-	} else if (
-		conversationDetails.withUser &&
-		conversationDetails.withUser.gender == 'female'
-	) {
-		avatarSrc = womanAvatar;
-		avatarAlt = 'woman avatar';
-		conversationName = conversationDetails.withUser.username;
 	} else {
-		avatarSrc = manAvatar;
-		avatarAlt = 'man avatar';
-		conversationName = conversationDetails.withUser.username;
+		let withUser = conversationDetails.members.find(
+			member => member._id != authUser.id
+		);
+		if (withUser && withUser.gender == 'female') {
+			avatarSrc = womanAvatar;
+			avatarAlt = 'woman avatar';
+			conversationName = withUser.username;
+		} else {
+			avatarSrc = manAvatar;
+			avatarAlt = 'man avatar';
+			conversationName = withUser.username;
+		}
 	}
-
 	return (
 		<ListItem button onClick={onConversationClick}>
 			<ListItemAvatar>
@@ -47,13 +48,11 @@ export default function ConversationItem({ conversationDetails }) {
 
 	async function onConversationClick() {
 		//get the current conversation from DB
-		if(conversationDetails._id)  await handleGroupConversation()// existing conversation
-		else if(conversationDetails.withUser) handlePrivateConversation()
-		else {
-			throw "conversation doesn't exist"
-		}
+		if (conversationDetails._id) await handleExistingConversation();
+		// existing conversation
+		else handleNewConversation();
 
-		async function handleGroupConversation(){
+		async function handleExistingConversation() {
 			try {
 				let conversation = await Conversation.getConversation({
 					conversationId: conversationDetails._id,
@@ -67,20 +66,20 @@ export default function ConversationItem({ conversationDetails }) {
 				throw error;
 			}
 		}
-		 
-		async function handlePrivateConversation(){
+
+		async function handleNewConversation() {
+			const withUser = conversationDetails.members.find(
+				member => member._id != authUser.id
+			);
+			if (!withUser) throw "User doesn't exist";
 			const conversation = {
-				withUser: conversationDetails.withUser,
-				messages: []
-			}
+				withUser,
+				messages: [],
+			};
 			dispatch({
 				type: 'SET_CURRENT_CONVERSATION',
 				payload: conversation,
 			});
-		} 
-
-		
-
-		
+		}
 	}
 }

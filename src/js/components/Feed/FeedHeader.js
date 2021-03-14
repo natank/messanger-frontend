@@ -24,13 +24,21 @@ export default function FeedHeader() {
 	let history = useHistory();
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
-	let { currentConversation } = state;
+	let { currentConversation, authUser } = state;
 
 	function handleChange(event, newValue) {}
 
-	const conversationTitle = currentConversation.name
-		? currentConversation.name
-		: currentConversation.withUser.username;
+	let conversationTitle;
+	let withUser;
+
+	if (currentConversation.name) conversationTitle = currentConversation.name;
+	else {
+		withUser = currentConversation.members.find(
+			member => member._id != authUser.id
+		);
+		conversationTitle = withUser.username;
+	}
+
 	const conversationParticipants = currentConversation.members
 		? currentConversation.members
 				.map(member => member.username)

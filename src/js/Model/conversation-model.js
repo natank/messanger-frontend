@@ -148,14 +148,20 @@ export async function createConversation({ members, name }) {
 	return response;
 }
 
-export async function createMessage({ conversationId, authorId, text, withUserId }) {
+export async function createMessage({
+	conversationId,
+	authorId,
+	text,
+	withUserId,
+}) {
 	try {
 		let response = await messanger.post(
-			`/conversations/${conversationId}/createMessage`,
+			`/conversations/createMessage`,
 			{
-				authorId,
+				conversationId,
+				authorId, // the author of the message
+				withUserId, // private conversation: the other user
 				text,
-				withUserId
 			},
 			{
 				headers: {
