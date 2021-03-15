@@ -16,9 +16,8 @@ import UserList from './UserList';
 /**App context */
 import { MainContext } from '../../Context/main-context';
 
-/**Models */
-import * as User from '../../Model/user-model';
-import * as Conversation from '../../Model/conversation-model';
+/** Utils */
+import { submitNewConversation } from '../../Utils/utils';
 
 let useStyles = makeStyles(theme => ({
 	root: {
@@ -91,8 +90,14 @@ export default function NewConversation() {
 					color='secondary'
 					className={classes.submit}
 					onClick={() => {
-						submitNewConversation()
-							.then(() => history.push('/'))
+						submitNewConversation({ users: selectedUsers, authUser, groupName })
+							.then(conversation => {
+								dispatch({
+									type: 'ADD_CONVERSATIONS',
+									payload: conversation,
+								});
+								history.push('/');
+							})
 							.catch(err => console.log(err));
 					}}>
 					<CheckIcon />
@@ -124,20 +129,5 @@ export default function NewConversation() {
 		let extendedSelectedUsers = [...selectedUsers, selectedUser];
 		setSelectedUsers(extendedSelectedUsers);
 		setNotSelectedUsers(filteredListUsers);
-	}
-	async function submitNewConversation() {
-		const conversation = {
-			members: [...selectedUsers, authUser],
-			name: groupName,
-		};
-		try {
-			await Conversation.createConversation(conversation);
-		} catch (error) {
-			console.log(error);
-		}
-		dispatch({
-			type: 'ADD_CONVERSATIONS',
-			payload: conversation,
-		});
 	}
 }

@@ -33,23 +33,26 @@ export default function Feed() {
 	const { messages } = currentConversation;
 
 	async function createMessage({ message }) {
-		try {
-			await Conversation.createMessage({
-				conversationId: currentConversation._id,
-				authorId: authUser.id,
-				text: message,
-				withUserId: currentConversation.withUser._id
-			});
-			dispatch({
-				type: 'ADD_MESSAGE',
-				payload: {
+		if (currentConversation._id) {
+			try {
+				await Conversation.createMessage({
+					conversationId: currentConversation._id,
+					authorId: authUser.id,
 					text: message,
-					writtenBy: authUser,
-				},
-			});
-		} catch (error) {
-			console.log(error);
-			throw error;
+					withUserId: currentConversation.withUser._id,
+				});
+				dispatch({
+					type: 'ADD_MESSAGE',
+					payload: {
+						text: message,
+						writtenBy: authUser,
+					},
+				});
+			} catch (error) {
+				console.log(error);
+				throw error;
+			}
+		} else {
 		}
 	}
 
