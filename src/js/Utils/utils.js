@@ -14,15 +14,18 @@ export function today() {
 	);
 }
 
-export async function submitNewConversation({ users, authUser, groupName }) {
-	const conversation = {
-		members: [...users, authUser],
+export async function submitNewConversation({ members, authUser, groupName }) {
+	const conversationDetails = {
+		members: [...members, authUser],
 		name: groupName,
 	};
 	try {
-		await Conversation.createConversation(conversation);
+		const conversation = await Conversation.createConversation(
+			conversationDetails
+		);
+		return conversation;
 	} catch (error) {
 		console.log(error);
+		throw error;
 	}
-	return conversation;
 }

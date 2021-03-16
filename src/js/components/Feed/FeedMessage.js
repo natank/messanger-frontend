@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { makeStyles, Card, Typography } from '@material-ui/core';
 
 export default function FeedMessage({

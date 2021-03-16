@@ -90,7 +90,11 @@ export default function NewConversation() {
 					color='secondary'
 					className={classes.submit}
 					onClick={() => {
-						submitNewConversation({ users: selectedUsers, authUser, groupName })
+						submitNewConversation({
+							members: selectedUsers,
+							authUser,
+							groupName,
+						})
 							.then(conversation => {
 								dispatch({
 									type: 'ADD_CONVERSATIONS',

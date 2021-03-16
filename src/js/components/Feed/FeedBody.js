@@ -41,8 +41,8 @@ export default function FeedBody({ messages }) {
 				{messages ? (
 					messages.map((message, index) => (
 						<FeedMessage
-							messageText={message.text}
-							author={message.writtenBy}
+							messageText={message.messageText}
+							author={message.author}
 							key={index}
 						/>
 					))

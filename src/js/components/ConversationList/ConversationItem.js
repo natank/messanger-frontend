@@ -71,14 +71,9 @@ export default function ConversationItem({ conversationDetails }) {
 			const withUser = conversationDetails.members.find(
 				member => member._id != authUser.id
 			);
-			if (!withUser) throw "User doesn't exist";
-			const conversation = {
-				withUser,
-				messages: [],
-			};
 			dispatch({
 				type: 'SET_CURRENT_CONVERSATION',
-				payload: conversation,
+				payload: { ...conversationDetails },
 			});
 		}
 	}

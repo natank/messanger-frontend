@@ -25,13 +25,12 @@ export default function FeedHeader() {
 	let { store } = useContext(MainContext);
 	let [state, dispatch] = store;
 	let { currentConversation, authUser } = state;
-
-	function handleChange(event, newValue) {}
+	const isGroupConversation = currentConversation.name !== undefined;
 
 	let conversationTitle;
 	let withUser;
 
-	if (currentConversation.name) conversationTitle = currentConversation.name;
+	if (isGroupConversation) conversationTitle = currentConversation.name;
 	else {
 		withUser = currentConversation.members.find(
 			member => member._id != authUser.id
@@ -39,15 +38,14 @@ export default function FeedHeader() {
 		conversationTitle = withUser.username;
 	}
 
-	const conversationParticipants = currentConversation.members
+	const conversationParticipants = isGroupConversation
 		? currentConversation.members
 				.map(member => member.username)
 				.toString()
 				.replace(',', ', ')
 		: null;
 	function determineConversationAvatar() {
-		const { withUser } = currentConversation;
-		if (!withUser) return groupAvatar;
+		if (isGroupConversation) return groupAvatar;
 		else if (withUser.gender == 'female') return womanAvatar;
 		else if (withUser.gender == 'male') return manAvatar;
 		else throw 'illegal gender name';

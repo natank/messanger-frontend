@@ -135,7 +135,8 @@ export async function getConversationMessages(conversationDetails, authUser) {
 }
 
 export async function createConversation({ members, name }) {
-	members = members.map(member => member.id);
+	members = members.map(member => member._id);
+	console.log(members);
 	let response = await messanger.post(
 		'/conversations',
 		{ members, name },
@@ -145,7 +146,7 @@ export async function createConversation({ members, name }) {
 			},
 		}
 	);
-	return response;
+	return response.data;
 }
 
 export async function createMessage({
