@@ -44,7 +44,7 @@ export default function Feed() {
 					type: 'ADD_MESSAGE',
 					payload: {
 						text: message,
-						writtenBy: authUser,
+						author: authUser,
 					},
 				});
 			} catch (error) {
@@ -86,8 +86,8 @@ export default function Feed() {
 				try {
 					await Conversation.createMessage({
 						conversationId: currentConversation._id,
-						authorId: authUser.id,
-						text: newMessageInProgress.message,
+						author: authUser.id,
+						text: newMessageInProgress.message.messageText,
 					});
 					setNewMessageInProgress(undefined);
 				} catch (error) {
