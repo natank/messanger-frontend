@@ -1,0 +1,52 @@
+// context
+const currentConversation = {
+    members: [{
+        id: String,
+        gender: String,
+        status: String,
+        username: String
+    }
+    ],
+    _id: conversationId,
+    messages: [
+        {
+            author: {
+                id: ObjectId,
+                gender: String,
+                status: String,
+                username: String
+            },
+            text: String
+        }
+    ]
+}
+
+
+
+//FeedMessage
+input: {
+    text: String,
+    author: {id: String, username: string}
+}
+
+// Feed
+input: {}
+output:[
+]
+
+// Models
+
+/** Conversation **/
+createMessage: {
+    message: String
+}
+
+// Reducers
+Add_Message: {
+    payload: {
+        text: String,
+        author: {
+            username, id
+        }
+    }
+}

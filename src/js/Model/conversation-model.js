@@ -170,6 +170,7 @@ export async function createMessage({
 				},
 			}
 		);
+		console.log(response)
 	} catch (error) {
 		console.log(error);
 		throw error;

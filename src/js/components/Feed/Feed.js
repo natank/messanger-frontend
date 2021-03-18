@@ -62,7 +62,7 @@ export default function Feed() {
 				// Enter the component to "message in progress state"
 				setNewMessageInProgress({
 					conversation: newConversation,
-					message: { author: authUser, messageText: message },
+					message: { author: authUser, text: message },
 				});
 			} catch (error) {
 				console.log(error);
@@ -86,7 +86,7 @@ export default function Feed() {
 				try {
 					await Conversation.createMessage({
 						conversationId: currentConversation._id,
-						author: authUser.id,
+						authorId: authUser.id,
 						text: newMessageInProgress.message.messageText,
 					});
 					setNewMessageInProgress(undefined);

@@ -3,7 +3,7 @@ import { makeStyles, Card, Typography } from '@material-ui/core';
 
 export default function FeedMessage({
 	color = '#fff',
-	messageText = 'hello',
+	text = 'hello',
 	author,
 }) {
 	let maxWidth = `${getRandom(30, 50)}%`;
@@ -32,7 +32,7 @@ export default function FeedMessage({
 				{author.username}
 			</Typography>
 			<Typography className={classes.body} variant='body2'>
-				{messageText}
+				{text}
 			</Typography>
 		</Card>
 	);
