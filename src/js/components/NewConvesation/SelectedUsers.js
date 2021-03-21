@@ -43,7 +43,7 @@ export default function SelectedUsers({
 			<List className={classes.root}>
 				{selectedUsers.map(user => {
 					return (
-						<ListItem key={user.id} className={classes.listItem}>
+						<ListItem key={user._id} className={classes.listItem}>
 							<ListItemAvatar>
 								<Avatar
 									className={classes.avatar}

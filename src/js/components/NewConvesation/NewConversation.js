@@ -4,7 +4,7 @@ import CheckIcon from '@material-ui/icons/Check';
 
 /**Third party */
 import { Container, Fab, Input } from '@material-ui/core';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 
@@ -44,26 +44,32 @@ let useStyles = makeStyles(theme => ({
 
 export default function NewConversation() {
 	/**Hooks */
-	let classes = useStyles();
-	let history = useHistory();
+	const classes = useStyles();
+	const history = useHistory();
 
 	/**Context  */
-	let mainContext = useContext(MainContext);
-	let { store } = mainContext;
+	const mainContext = useContext(MainContext);
+	const { store } = mainContext;
 
 	/**Global state */
-	let [state, dispatch] = store;
-	let { users, authUser } = state;
+	const [state, dispatch] = store;
+	const { users, authUser } = state;
 
 	/**Local state */
-	let [selectedUsers, setSelectedUsers] = useState([]);
-	let [notSelectedUsers, setNotSelectedUsers] = useState(users);
-	let [mode, setMode] = useState('start'); /*search, subject */
-	let [groupName, setGroupName] = useState('');
+	const [selectedUsers, setSelectedUsers] = useState([]);
+	const [displayedListUsers, setDisplayedListUsers] = useState(users);
+	const [mode, setMode] = useState('start'); /*search, subject */
+	const [groupName, setGroupName] = useState('');
+	const [usersFilter, setUsersFilter] = useState('');
+
+	useEffect(() => {}, [usersFilter]);
 
 	return (
 		<Container disableGutters={true}>
-			<Header mode={mode} setMode={setMode} />
+			<Header
+				modeProp={[mode, setMode]}
+				usersFilterProp={[usersFilter, setUsersFilter]}
+			/>
 			{mode == 'subject' ? (
 				<Container disableGutters={true} className={classes.input}>
 					<Input
@@ -80,7 +86,7 @@ export default function NewConversation() {
 			<SelectedUsers selectedUsers={[...selectedUsers]} mode={mode} />
 
 			{mode !== 'subject' ? (
-				<UserList onUserSelected={onUserSelected} users={notSelectedUsers} />
+				<UserList onUserSelected={onUserSelected} users={displayedListUsers} />
 			) : null}
 
 			{/**submit group button*/}
@@ -123,6 +129,7 @@ export default function NewConversation() {
 
 	async function onUserSelected(userId) {
 		let selectedUser = undefined;
+
 		let filteredListUsers = notSelectedUsers.filter(user => {
 			if (user.id !== userId) return true;
 			else {
@@ -130,8 +137,23 @@ export default function NewConversation() {
 				return false;
 			}
 		});
+
+		selectedUser._id = selectedUser.id;
+		delete selectedUser['id'];
+
+		//add the user to the selected users
 		let extendedSelectedUsers = [...selectedUsers, selectedUser];
 		setSelectedUsers(extendedSelectedUsers);
-		setNotSelectedUsers(filteredListUsers);
+
+		// apply the user filter to get the displayed list
+		const regex = new RegExp(`^${usersFilter}`);
+		let displayedListUsersLocal = filteredListUsers.filter(user =>
+			regex.exec(user.username)
+		);
+		setDisplayedListUsers(displayedListUsersLocal);
+	}
+
+	async function onFilterChange(filter) {
+		setUsersFilter(filter);
 	}
 }

@@ -81,7 +81,7 @@ export async function getConversations({ userId, filter }) {
 }
 
 export async function getConversation(props) {
-	let { conversationId, userId, withUserId } = props;
+	let { conversationId, userId } = props;
 	// conversation already exist
 	if (conversationId) {
 		try {
@@ -149,19 +149,13 @@ export async function createConversation({ members, name }) {
 	return response.data;
 }
 
-export async function createMessage({
-	conversationId,
-	authorId,
-	text,
-	withUserId,
-}) {
+export async function createMessage({ conversationId, author, text }) {
 	try {
 		let response = await messanger.post(
 			`/conversations/createMessage`,
 			{
 				conversationId,
-				authorId, // the author of the message
-				withUserId, // private conversation: the other user
+				author, // the author of the message
 				text,
 			},
 			{
@@ -170,7 +164,7 @@ export async function createMessage({
 				},
 			}
 		);
-		console.log(response)
+		console.log(response);
 	} catch (error) {
 		console.log(error);
 		throw error;

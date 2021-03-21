@@ -1,5 +1,4 @@
-// context
-const currentConversation = {
+currentConversation: {
     members: [{
         id: String,
         gender: String,
@@ -21,7 +20,13 @@ const currentConversation = {
     ]
 }
 
-
+submitNewConversation: {
+  input: {
+    members: [{_id: string}], //required
+    authUser: {_id: string}, // required
+    name: string 
+  }
+}
 
 //FeedMessage
 input: {
@@ -38,7 +43,9 @@ output:[
 
 /** Conversation **/
 createMessage: {
-    message: String
+    conversationId: String,
+    authorId: String,
+    text: String,
 }
 
 // Reducers

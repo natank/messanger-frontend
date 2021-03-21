@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import NewConversationStartHeader from './NewConversationStartHeader';
-import ConversationFindHeader from '../Common/ConversationFindHeader';
+import NewConversationSearchHeader from './NewConversationSearchHeader';
 import NewConversationSubjectHeader from './NewConversationSubjectHeader';
 
-export default function NewConversationHeader({ mode, setMode }) {
+export default function NewConversationHeader(props) {
+	const { modeProp, usersFilterProp } = props;
+	const [mode, setMode] = modeProp;
+	const [usersFilter, setUsersFilter] = usersFilterProp;
+
 	switch (mode) {
 		case 'start':
 			return <NewConversationStartHeader setMode={setMode} />;
 		case 'search':
-			return <ConversationFindHeader setMode={setMode} prevMode={'start'} />;
+			return (
+				<NewConversationSearchHeader
+					value={usersFilter}
+					setValue={setUsersFilter}
+					setMode={setMode}
+				/>
+			);
 		case 'subject':
 			return <NewConversationSubjectHeader setMode={setMode} />;
 	}

@@ -6,7 +6,11 @@ export function currentConversationReducer(previousState, action) {
 			return null;
 		case 'ADD_MESSAGE':
 			const newState = { ...previousState };
-			newState.messages = [...newState.messages, action.payload];
+			if (action.payload.conversationId == newState._id)
+				newState.messages = [
+					...newState.messages,
+					{ author: action.payload.author, text: action.payload.text },
+				];
 			return newState;
 
 		default:

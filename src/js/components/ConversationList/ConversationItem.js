@@ -68,9 +68,6 @@ export default function ConversationItem({ conversationDetails }) {
 		}
 
 		async function handleNewConversation() {
-			const withUser = conversationDetails.members.find(
-				member => member._id != authUser.id
-			);
 			dispatch({
 				type: 'SET_CURRENT_CONVERSATION',
 				payload: { ...conversationDetails },

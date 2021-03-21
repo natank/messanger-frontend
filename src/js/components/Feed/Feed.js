@@ -1,5 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useContext, useState } from 'react';
+import openSocket from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
 import { MainContext } from '../../Context/main-context';
 import FeedBody from './FeedBody';
@@ -7,6 +8,7 @@ import FeedHeader from './FeedHeader';
 import * as Conversation from '../../Model/conversation-model';
 import FeedNewMessage from './FeedNewMessage';
 import { submitNewConversation } from '../../Utils/utils';
+import { database } from 'firebase';
 
 let useStyles = makeStyles({
 	root: {
@@ -25,7 +27,7 @@ export default function Feed() {
 	const { store } = useContext(MainContext);
 	const [state, dispatch] = store;
 	const { currentConversation, authUser } = state;
-	const [newMessageInProgress, setNewMessageInProgress] = useState(undefined);
+
 	if (!currentConversation) {
 		history.push('/');
 		return null;
@@ -36,16 +38,8 @@ export default function Feed() {
 			try {
 				await Conversation.createMessage({
 					conversationId: currentConversation._id,
-					authorId: authUser.id,
+					author: authUser,
 					text: message,
-				});
-
-				dispatch({
-					type: 'ADD_MESSAGE',
-					payload: {
-						text: message,
-						author: authUser,
-					},
 				});
 			} catch (error) {
 				console.log(error);
@@ -59,10 +53,21 @@ export default function Feed() {
 					members: [{ _id: withUser._id }],
 					authUser: { _id: authUser.id },
 				});
-				// Enter the component to "message in progress state"
-				setNewMessageInProgress({
-					conversation: newConversation,
-					message: { author: authUser, text: message },
+
+				await Conversation.createMessage({
+					conversationId: newConversation._id,
+					author: authUser,
+					text: message,
+				});
+
+				const conversation = await Conversation.getConversation({
+					conversationId: newConversation._id,
+					userId: authUser.id,
+				});
+
+				dispatch({
+					type: 'SET_CURRENT_CONVERSATION',
+					payload: conversation,
 				});
 			} catch (error) {
 				console.log(error);
@@ -70,34 +75,22 @@ export default function Feed() {
 			}
 		}
 	}
-	useEffect(() => {
-		if (newMessageInProgress)
-			dispatch({
-				type: 'SET_CURRENT_CONVERSATION',
-				payload: {
-					...newMessageInProgress.conversation,
-					messages: [newMessageInProgress.message],
-				},
-			});
-	}, [newMessageInProgress]);
-	useEffect(() => {
-		async function addMessage() {
-			if (currentConversation && newMessageInProgress) {
-				try {
-					await Conversation.createMessage({
-						conversationId: currentConversation._id,
-						authorId: authUser.id,
-						text: newMessageInProgress.message.messageText,
-					});
-					setNewMessageInProgress(undefined);
-				} catch (error) {
-					throw error;
-				}
-			}
-		}
-		addMessage();
-	}, [currentConversation]);
 
+	useEffect(() => {
+		const socket = openSocket('http://localhost:8080');
+		socket.on('message', data => {
+			if (data.action === 'create') {
+				dispatch({
+					type: 'ADD_MESSAGE',
+					payload: {
+						text: data.message.text,
+						author: data.message.author,
+						conversationId: data.message.conversationId,
+					},
+				});
+			}
+		});
+	}, []);
 	return (
 		<Container disableGutters className={classes.root}>
 			<FeedHeader />
