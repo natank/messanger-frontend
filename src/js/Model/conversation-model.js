@@ -135,7 +135,7 @@ export async function getConversationMessages(conversationDetails, authUser) {
 }
 
 export async function createConversation({ members, name }) {
-	members = members.map(member => member._id);
+	members = members.map(member => member.id);
 	console.log(members);
 	let response = await messanger.post(
 		'/conversations',

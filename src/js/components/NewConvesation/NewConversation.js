@@ -57,12 +57,11 @@ export default function NewConversation() {
 
 	/**Local state */
 	const [selectedUsers, setSelectedUsers] = useState([]);
-	const [displayedListUsers, setDisplayedListUsers] = useState(users);
 	const [mode, setMode] = useState('start'); /*search, subject */
 	const [groupName, setGroupName] = useState('');
 	const [usersFilter, setUsersFilter] = useState('');
 
-	useEffect(() => {}, [usersFilter]);
+	const displayedListUsers = handleDisplayedListUsers();
 
 	return (
 		<Container disableGutters={true}>
@@ -128,29 +127,21 @@ export default function NewConversation() {
 	);
 
 	async function onUserSelected(userId) {
-		let selectedUser = undefined;
-
-		let filteredListUsers = notSelectedUsers.filter(user => {
-			if (user.id !== userId) return true;
-			else {
-				selectedUser = user;
-				return false;
-			}
-		});
-
-		selectedUser._id = selectedUser.id;
-		delete selectedUser['id'];
+		const selectedUser = users.find(user=>user.id == userId);
 
 		//add the user to the selected users
 		let extendedSelectedUsers = [...selectedUsers, selectedUser];
 		setSelectedUsers(extendedSelectedUsers);
+	}
 
-		// apply the user filter to get the displayed list
-		const regex = new RegExp(`^${usersFilter}`);
-		let displayedListUsersLocal = filteredListUsers.filter(user =>
-			regex.exec(user.username)
-		);
-		setDisplayedListUsers(displayedListUsersLocal);
+	function handleDisplayedListUsers(){
+		const displayedListUsersLocal = users.filter(user => {
+			const regex = new RegExp(`^${usersFilter}`);
+			const isUserSelected = selectedUsers.some(selectedUser=>selectedUser.id == user.id)
+			if (!isUserSelected && regex.exec(user.username) ) return true;
+		});
+
+		return displayedListUsersLocal;
 	}
 
 	async function onFilterChange(filter) {
