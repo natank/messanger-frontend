@@ -38,7 +38,12 @@ export default function ConversationFindHeader({
 				<ArrowBack onClick={() => setMode(prevMode)} />
 			</Button>
 
-			<SearchField handleChange={handleChange} filter={filter} />
+			<SearchField
+				value={filter}
+				setValue={setFilter}
+				handleChange={handleChange}
+				filter={filter}
+			/>
 		</Container>
 	);
 

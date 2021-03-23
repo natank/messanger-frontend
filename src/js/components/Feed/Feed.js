@@ -50,8 +50,8 @@ export default function Feed() {
 				const withUser = currentConversation.members.find(member => member._id);
 				// create new conversation,
 				const newConversation = await submitNewConversation({
-					members: [{ _id: withUser._id }],
-					authUser: { _id: authUser.id },
+					members: [{ id: withUser._id }],
+					authUser: { id: authUser.id },
 				});
 
 				await Conversation.createMessage({
@@ -90,6 +90,9 @@ export default function Feed() {
 				});
 			}
 		});
+		return function cleanup() {
+			socket.close();
+		};
 	}, []);
 	return (
 		<Container disableGutters className={classes.root}>

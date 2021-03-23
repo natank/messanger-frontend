@@ -22,8 +22,8 @@ currentConversation: {
 
 submitNewConversation: {
   input: {
-    members: [{_id: string}], //required
-    authUser: {_id: string}, // required
+    members: [{id: string}], //required
+    authUser: {id: string}, // required
     name: string 
   }
 }
@@ -46,6 +46,10 @@ createMessage: {
     conversationId: String,
     authorId: String,
     text: String,
+}
+
+createConversation {
+  members: []{id: string}
 }
 
 // Reducers

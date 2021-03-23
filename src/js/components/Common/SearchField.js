@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-export default function SearchField({ value, setValue, setMode }) {
+export default function SearchField({ value, setValue }) {
 	let useStyles = makeStyles({
 		root: { marginRight: '1rem' },
 	});
